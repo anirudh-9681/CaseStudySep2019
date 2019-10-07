@@ -1,0 +1,99 @@
+package com.beehyv.case_study.services;
+
+import com.beehyv.case_study.dto.ProductDTO;
+import com.beehyv.case_study.entities.Product;
+import com.beehyv.case_study.repositories.ProductRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@Service
+public class ProductManager {
+    @Autowired
+    ProductRepo productRepo;
+
+    public ProductDTO addProduct(ProductDTO productDTO){
+        if(productRepo.existsByProductId(productDTO.getProductId())){
+            return null;
+        }
+        Product product = new Product();
+        product.setDTO(productDTO);
+        try {
+            return productRepo.save(product).getDTO();
+        }catch (NullPointerException e){
+            return null;
+        }
+    }
+
+    public ProductDTO updateProduct(ProductDTO productDTO){
+        if(productRepo.existsByProductId(productDTO.getProductId())){
+            Product product = productRepo.findByProductId(productDTO.getProductId());
+            product.setDTO(productDTO);
+            try{
+                return productRepo.save(product).getDTO();
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public ProductDTO getProductById(int productId){
+        if(productRepo.existsByProductId(productId)){
+            return productRepo.findByProductId(productId).getDTO();
+        }
+        return null;
+    }
+
+    public List<ProductDTO> searchBySubCategory(String searchString){
+        return productRepo.findAllBySubcategoryContaining(searchString)
+                .stream()
+                .map(product -> product.getDTO())
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> searchByCategory(String searchString){
+        return productRepo.findAllByCategoryContaining(searchString)
+                .stream()
+                .map(product -> product.getDTO())
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> searchByName(String searchString){
+        return productRepo.findAllByNameIgnoreCase(searchString)
+                .stream()
+                .map(product -> product.getDTO())
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> searchByDetail(String searchString){
+        return productRepo.findAllByDetailsContaining(searchString)
+                .stream()
+                .map(product -> product.getDTO())
+                .collect(Collectors.toList());
+    }
+
+    public Set<ProductDTO> searchByString(String searchString){
+
+        return Stream.of(
+                searchByName(searchString),
+                searchByCategory(searchString),
+                searchBySubCategory(searchString),
+                searchByDetail(searchString))
+                .filter(Objects::nonNull)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+//        List<ProductDTO> productDTOs = new ArrayList<>();
+//        productDTOs.addAll(searchByName(searchString));
+//        productDTOs.addAll(searchByCategory(searchString));
+//        productDTOs.addAll(searchBySubCategory(searchString));
+//        productDTOs.addAll(searchByDetail(searchString));
+//        return productDTOs;
+    }
+}

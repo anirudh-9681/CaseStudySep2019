@@ -1,0 +1,83 @@
+Available paths and description.
+----------------------------------
+REST
+-----------
+
+"/login"    POST
+
+REQUEST     {
+    "email"     : "< user email>",
+    "password"  : "< Base64-encoded String >"
+}
+
+RESPONSE    {
+    "result"    : "< success/failure >"
+}   along with 200 OK or 401
+
+-----
+
+"/signup"   POST
+
+REQUEST     {
+    "name"      : "< user name >"
+    "email"     : "< user email >",
+    "password"  : "< Base64-encoded String >"
+}
+
+RESPONSE    {
+    "userId"    : "< User Sequence Number >"
+}   along with 200 OK or 401
+
+-----
+
+"/logout"   POST
+
+REQUEST     {
+    "userId"    : "< User Sequence Number >"
+}
+
+RESPONSE    {
+    "result"    : "< success/failure >"
+}   along with 200 OK or 401
+
+-----
+
+"/getProfile/{userId}"      GET
+
+REQUEST     {}
+
+RESPONSE    {
+    "userID"    : "< ID of User >",
+    "name"      : "xyz",
+    "email"     : "xyz@beehyv.com",
+    "phone"     : "<mobile>",
+    "address"   : {
+        "street"    : "<>",
+        "city"      : "<>",
+        "state"     : "<>",
+        "pincode"   : "<>"
+    }
+}   along with 200 OK or 401
+
+-----
+
+"/updateProfile"    POST
+
+REQUEST     {
+    "userID"    : "< ID of User >",
+    "name"      : "xyz",
+    "email"     : "xyz@beehyv.com",
+    "phone"     : "<mobile>",
+    "address"   : {
+        "street"    : "<>",
+        "city"      : "<>",
+        "state"     : "<>",
+        "pincode"   : "<>"
+    }
+}
+
+RESPONSE    {
+    "result"    : "< success/failure >"
+}   along with 200 OK or 401
+
+-----

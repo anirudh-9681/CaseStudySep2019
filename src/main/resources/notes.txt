@@ -1,0 +1,29 @@
+var url = "http://localhost:8080/signup";
+fetch(url,{
+  method:"POST",
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body: JSON.stringify({
+    username:"anirudh",
+    password:"xyz"
+  })
+}).then(
+  response => response.json().then(function(data) {
+    console.log(data);
+  }));
+
+OR
+
+var url = "http://localhost:8080/signup";
+var response = await fetch(url,{
+  method:"POST",
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body: JSON.stringify({
+    username:"anirudh",
+    password:"xyz"
+  })
+});
+var body = await response.json();
