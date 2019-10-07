@@ -19,11 +19,11 @@ public class ProductController {
     ProductManager productManager;
 
     @PostMapping("/addProduct")
-    public ResponseEntity addProduct(@RequestBody String json){
+    public ResponseEntity addProduct(@RequestBody String json) {
         try {
-            ProductDTO productDTO = ObjectMapperImpl.getObjectFromJson(json,ProductDTO.class);
+            ProductDTO productDTO = ObjectMapperImpl.getObjectFromJson(json, ProductDTO.class);
             productDTO = productManager.addProduct(productDTO);
-            if(productDTO != null){
+            if (productDTO != null) {
                 return ResponseEntity.ok().body(productDTO);
             }
         } catch (IOException e) {
@@ -33,11 +33,11 @@ public class ProductController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity updateProduct(@RequestBody String json){
+    public ResponseEntity updateProduct(@RequestBody String json) {
         try {
-            ProductDTO productDTO = ObjectMapperImpl.getObjectFromJson(json,ProductDTO.class);
+            ProductDTO productDTO = ObjectMapperImpl.getObjectFromJson(json, ProductDTO.class);
             productDTO = productManager.updateProduct(productDTO);
-            if(productDTO != null){
+            if (productDTO != null) {
                 return ResponseEntity.ok().body(productDTO);
             }
         } catch (IOException e) {
@@ -47,25 +47,29 @@ public class ProductController {
     }
 
     @GetMapping("/getById/{productId}")
-    public ResponseEntity getProductById(@PathVariable int productId){
-        ProductDTO productDTO = productManager.getProductById(productId);
-        if (productDTO != null){
-            return ResponseEntity.ok().body(productDTO);
-        } else {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity getProductById(@PathVariable String productId) {
+        try {
+            ProductDTO productDTO = productManager.getProductById(Integer.parseInt(productId));
+            if (productDTO != null) {
+                return ResponseEntity.ok().body(productDTO);
+            }
+        }catch (NumberFormatException e){
+            e.printStackTrace();
         }
+
+        return ResponseEntity.badRequest().build();
 
     }
 
     @GetMapping("/{categoryName}")
-    public ResponseEntity getProductByCategory(@PathVariable String categoryName){
+    public ResponseEntity getProductByCategory(@PathVariable String categoryName) {
         return ResponseEntity.ok().body(
                 productManager.searchByCategory(categoryName)
         );
     }
 
     @GetMapping("/search/{searchString}")
-    public ResponseEntity search(@PathVariable String searchString){
+    public ResponseEntity search(@PathVariable String searchString) {
         Set<ProductDTO> productDTOs = productManager.searchByString(searchString);
         return ResponseEntity.ok().body(productDTOs);
     }
