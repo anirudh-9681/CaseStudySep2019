@@ -73,4 +73,9 @@ public class ProductController {
         Set<ProductDTO> productDTOs = productManager.searchByString(searchString);
         return ResponseEntity.ok().body(productDTOs);
     }
+
+    @PostMapping("/{categoryName}/getFilteredProducts")
+    public ResponseEntity getFilteredProducts(@PathVariable String categoryName, @RequestBody String json){
+        return ResponseEntity.ok().build();
+    }
 }

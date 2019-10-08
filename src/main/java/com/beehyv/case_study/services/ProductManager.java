@@ -96,4 +96,6 @@ public class ProductManager {
 //        productDTOs.addAll(searchByDetail(searchString));
 //        return productDTOs;
     }
+
+//    public Set<ProductDTO> searchWithFilters()
 }
