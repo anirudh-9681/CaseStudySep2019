@@ -5,6 +5,7 @@ import com.beehyv.case_study.utilities.Address;
 import com.beehyv.case_study.utilities.AddressFormatter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class MyUser {
@@ -70,9 +71,9 @@ public class MyUser {
 
     public void setDTO(UserProfileDTO userProfileDTO){
 //        userId = userProfileDTO.getUserId(); // never change userId even though in this case, replacing with same value
-        name = userProfileDTO.getName();
-        email = userProfileDTO.getEmail();
-        phone = userProfileDTO.getPhone();
-        address = userProfileDTO.getAddress();
+        if (Objects.nonNull(userProfileDTO.getName())) name = userProfileDTO.getName();
+        if (Objects.nonNull(userProfileDTO.getEmail())) email = userProfileDTO.getEmail();
+        if (Objects.nonNull(userProfileDTO.getPhone())) phone = userProfileDTO.getPhone();
+        if (Objects.nonNull(userProfileDTO.getAddress())) address = userProfileDTO.getAddress();
     }
 }

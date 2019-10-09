@@ -1,5 +1,7 @@
 package com.beehyv.case_study.dto;
 
+import java.util.Objects;
+
 public class SignUpDTO {
     private String email;
     private String name;
@@ -27,5 +29,9 @@ public class SignUpDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isValid(){
+        return !Objects.isNull(name) && !Objects.isNull(email) && !Objects.isNull(password);
     }
 }

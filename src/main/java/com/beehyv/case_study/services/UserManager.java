@@ -24,7 +24,7 @@ public class UserManager {
 
 
     public int addUser(SignUpDTO signUpDTO) {
-        if(signUpDTO == null){
+        if(!signUpDTO.isValid()){
             return -1;
         }
         if (myUserCredentialsRepo.existsByEmail(signUpDTO.getEmail())) {

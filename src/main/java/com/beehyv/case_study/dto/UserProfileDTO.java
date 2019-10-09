@@ -2,6 +2,8 @@ package com.beehyv.case_study.dto;
 
 import com.beehyv.case_study.utilities.Address;
 
+import java.util.Objects;
+
 public class UserProfileDTO{
     private int userId;
     private String name;
@@ -47,5 +49,9 @@ public class UserProfileDTO{
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public boolean isValid(){
+        return !Objects.isNull(name) && !Objects.isNull(email) && !Objects.isNull(phone) && !Objects.isNull(address);
     }
 }

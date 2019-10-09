@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Product {
@@ -67,11 +68,11 @@ public class Product {
     }
 
     public void setDTO(ProductDTO productDTO){
-        name = productDTO.getName();
-        price = productDTO.getPrice();
-        details = productDTO.getDetails();
-        category = productDTO.getCategory();
-        subcategory = productDTO.getSubcategory();
+        if (Objects.nonNull(productDTO.getName())) name = productDTO.getName();
+        if (productDTO.getPrice() != 0) price = productDTO.getPrice();
+        if (Objects.nonNull(productDTO.getDetails())) details = productDTO.getDetails();
+        if (Objects.nonNull(productDTO.getCategory())) category = productDTO.getCategory();
+        if (Objects.nonNull(productDTO.getSubcategory())) subcategory = productDTO.getSubcategory();
     }
 
     public ProductDTO getDTO(){

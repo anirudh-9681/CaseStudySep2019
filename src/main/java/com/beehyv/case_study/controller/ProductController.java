@@ -3,7 +3,6 @@ package com.beehyv.case_study.controller;
 import com.beehyv.case_study.dto.ProductDTO;
 import com.beehyv.case_study.services.ProductManager;
 import com.beehyv.case_study.utilities.ObjectMapperImpl;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

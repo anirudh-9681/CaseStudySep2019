@@ -7,7 +7,6 @@ import com.beehyv.case_study.utilities.FilterSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,6 +30,7 @@ public class ProductManager {
     }
 
     public ProductDTO updateProduct(ProductDTO productDTO){
+//        if ()
         if(productRepo.existsByProductId(productDTO.getProductId())){
             Product product = productRepo.findByProductId(productDTO.getProductId());
             product.setDTO(productDTO);
