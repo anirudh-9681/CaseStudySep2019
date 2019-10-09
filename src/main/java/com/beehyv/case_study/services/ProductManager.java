@@ -30,7 +30,6 @@ public class ProductManager {
     }
 
     public ProductDTO updateProduct(ProductDTO productDTO){
-//        if ()
         if(productRepo.existsByProductId(productDTO.getProductId())){
             Product product = productRepo.findByProductId(productDTO.getProductId());
             product.setDTO(productDTO);
