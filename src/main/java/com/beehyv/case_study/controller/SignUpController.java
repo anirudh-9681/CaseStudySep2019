@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,7 +18,7 @@ public class SignUpController {
     UserManager userManager;
 
     @PostMapping("/signup")
-    public ResponseEntity commitNewUser(@RequestBody String json) {
+    ResponseEntity commitNewUser(@RequestBody String json) {
         SignUpDTO signUpDTO;
         try {
             signUpDTO = ObjectMapperImpl.getObjectFromJson(json,SignUpDTO.class);
