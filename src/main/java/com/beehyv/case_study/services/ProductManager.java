@@ -3,13 +3,12 @@ package com.beehyv.case_study.services;
 import com.beehyv.case_study.dto.ProductDTO;
 import com.beehyv.case_study.entities.Product;
 import com.beehyv.case_study.repositories.ProductRepo;
+import com.beehyv.case_study.utilities.FilterSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import javax.xml.bind.SchemaOutputResolver;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,28 +53,32 @@ public class ProductManager {
     public List<ProductDTO> searchBySubCategory(String searchString){
         return productRepo.findAllBySubcategoryContaining(searchString)
                 .stream()
-                .map(product -> product.getDTO())
+                .filter(Objects::nonNull)
+                .map(Product::getDTO)
                 .collect(Collectors.toList());
     }
 
     public List<ProductDTO> searchByCategory(String searchString){
         return productRepo.findAllByCategoryContaining(searchString)
                 .stream()
-                .map(product -> product.getDTO())
+                .filter(Objects::nonNull)
+                .map(Product::getDTO)
                 .collect(Collectors.toList());
     }
 
     public List<ProductDTO> searchByName(String searchString){
         return productRepo.findAllByNameIgnoreCase(searchString)
                 .stream()
-                .map(product -> product.getDTO())
+                .filter(Objects::nonNull)
+                .map(Product::getDTO)
                 .collect(Collectors.toList());
     }
 
     public List<ProductDTO> searchByDetail(String searchString){
         return productRepo.findAllByDetailsContaining(searchString)
                 .stream()
-                .map(product -> product.getDTO())
+                .filter(Objects::nonNull)
+                .map(Product::getDTO)
                 .collect(Collectors.toList());
     }
 
@@ -89,13 +92,14 @@ public class ProductManager {
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
-//        List<ProductDTO> productDTOs = new ArrayList<>();
-//        productDTOs.addAll(searchByName(searchString));
-//        productDTOs.addAll(searchByCategory(searchString));
-//        productDTOs.addAll(searchBySubCategory(searchString));
-//        productDTOs.addAll(searchByDetail(searchString));
-//        return productDTOs;
     }
 
-//    public Set<ProductDTO> searchWithFilters()
+    public Set<ProductDTO> searchWithFilters(Map<String,String> map){
+        FilterSpecification filterSpecification = new FilterSpecification(map);
+        return productRepo.findAll(filterSpecification)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(Product::getDTO)
+                .collect(Collectors.toSet());
+    }
 }

@@ -3,11 +3,13 @@ package com.beehyv.case_study.controller;
 import com.beehyv.case_study.dto.ProductDTO;
 import com.beehyv.case_study.services.ProductManager;
 import com.beehyv.case_study.utilities.ObjectMapperImpl;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 @RestController
@@ -76,6 +78,17 @@ public class ProductController {
 
     @PostMapping("/{categoryName}/getFilteredProducts")
     public ResponseEntity getFilteredProducts(@PathVariable String categoryName, @RequestBody String json){
-        return ResponseEntity.ok().build();
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String,String> map = ObjectMapperImpl.getObjectFromJson(json, Map.class);
+            map.put("category",categoryName);
+            Set<ProductDTO> productDTOs = productManager.searchWithFilters(map);
+            if (productDTOs != null){
+                return ResponseEntity.ok().body(productDTOs);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

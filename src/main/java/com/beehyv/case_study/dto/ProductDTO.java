@@ -5,7 +5,7 @@ import java.util.Objects;
 public class ProductDTO {
     private int productId;
     private String name;
-    private String price;
+    private int price;
     private String details;
     private String category;
     private String subcategory;
@@ -26,11 +26,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
