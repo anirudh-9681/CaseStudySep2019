@@ -15,6 +15,8 @@ public class MyUser {
     private String name;
     private String email;
     private String phone;
+    @OneToOne
+    private Cart cart;
 
     @Convert(converter = AddressFormatter.class)
     private Address address;
@@ -57,6 +59,14 @@ public class MyUser {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public UserProfileDTO getDTO(){

@@ -1,6 +1,7 @@
 package com.beehyv.case_study.entities;
 
 import com.beehyv.case_study.dto.ProductDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -74,7 +75,7 @@ public class Product {
         if (Objects.nonNull(productDTO.getCategory())) category = productDTO.getCategory();
         if (Objects.nonNull(productDTO.getSubcategory())) subcategory = productDTO.getSubcategory();
     }
-
+    @JsonIgnore
     public ProductDTO getDTO(){
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductId(productId);
@@ -84,5 +85,18 @@ public class Product {
         productDTO.setCategory(category);
         productDTO.setSubcategory(subcategory);
         return productDTO;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return productId == product.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
     }
 }
