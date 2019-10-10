@@ -1,14 +1,15 @@
 package com.beehyv.case_study.services;
 
-import com.beehyv.case_study.entities.*;
+import com.beehyv.case_study.entities.MyUser;
+import com.beehyv.case_study.entities.Order;
+import com.beehyv.case_study.entities.OrderItem;
+import com.beehyv.case_study.entities.OrderStatus;
 import com.beehyv.case_study.repositories.CartItemRepo;
-import com.beehyv.case_study.repositories.CartRepo;
 import com.beehyv.case_study.repositories.OrderItemRepo;
 import com.beehyv.case_study.repositories.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +17,6 @@ import java.util.stream.Collectors;
 public class OrderManager {
     @Autowired
     UserManager userManager;
-    @Autowired
-    CartManager cartManager;
     @Autowired
     OrderRepo orderRepo;
     @Autowired

@@ -1,7 +1,6 @@
 package com.beehyv.case_study.controller;
 
 import com.beehyv.case_study.entities.Order;
-import com.beehyv.case_study.services.CartManager;
 import com.beehyv.case_study.services.OrderManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

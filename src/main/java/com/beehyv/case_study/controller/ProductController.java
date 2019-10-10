@@ -14,7 +14,6 @@ import java.util.Set;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    //TODO fill apis
 
     @Autowired
     ProductManager productManager;
