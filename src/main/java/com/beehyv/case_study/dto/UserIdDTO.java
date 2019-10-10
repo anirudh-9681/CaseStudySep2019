@@ -6,22 +6,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UserIdDTO {
 
     @JsonProperty(value = "userId")
-    private int userId;
+    private long userId;
 
     public UserIdDTO(){
 
     }
 
     @JsonCreator
-    public UserIdDTO(int userId){
+    public UserIdDTO(long userId){
         this.userId = userId;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

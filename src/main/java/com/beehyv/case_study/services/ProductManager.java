@@ -42,7 +42,7 @@ public class ProductManager {
         return null;
     }
 
-    public ProductDTO getProductById(int productId){
+    public ProductDTO getProductById(long productId){
         if(productRepo.existsByProductId(productId)){
             return productRepo.findByProductId(productId).getDTO();
         }

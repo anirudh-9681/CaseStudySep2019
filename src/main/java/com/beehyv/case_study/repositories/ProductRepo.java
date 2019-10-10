@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductRepo extends JpaRepository<Product,Integer>, JpaSpecificationExecutor<Product> {
-    boolean existsByProductId(int productId);
-    Product findByProductId(int productId);
+public interface ProductRepo extends JpaRepository<Product,Long>, JpaSpecificationExecutor<Product> {
+    boolean existsByProductId(long productId);
+    Product findByProductId(long productId);
     List<Product> findAllBySubcategoryContaining(String subcategoryName);
     List<Product> findAllByCategoryContaining(String categoryName);
     List<Product> findAllByNameIgnoreCase(String productName);

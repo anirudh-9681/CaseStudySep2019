@@ -18,7 +18,7 @@ public class UserProfileController {
 
     @GetMapping("/getProfile/{userId}")
     ResponseEntity getUserProfile(@PathVariable String userId){
-        UserProfileDTO userProfileDTO = userManager.getUserProfileById(Integer.parseInt(userId));
+        UserProfileDTO userProfileDTO = userManager.getUserProfileById(Long.parseLong(userId));
         if (userProfileDTO != null) {
             return ResponseEntity.ok().body(userProfileDTO);
         }

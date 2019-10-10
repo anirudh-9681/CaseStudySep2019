@@ -2,15 +2,17 @@ package com.beehyv.case_study.services;
 
 import com.beehyv.case_study.dto.SignUpDTO;
 import com.beehyv.case_study.dto.UserProfileDTO;
-import com.beehyv.case_study.entities.*;
-import com.beehyv.case_study.repositories.*;
+import com.beehyv.case_study.entities.Cart;
+import com.beehyv.case_study.entities.MyUser;
+import com.beehyv.case_study.entities.MyUserCredentials;
+import com.beehyv.case_study.repositories.CartRepo;
+import com.beehyv.case_study.repositories.MyUserCredentialsRepo;
+import com.beehyv.case_study.repositories.MyUserRepo;
 import com.beehyv.case_study.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 public class UserManager {
@@ -20,16 +22,26 @@ public class UserManager {
     @Autowired
     CartRepo cartRepo;
     @Autowired
-    CartItemRepo cartItemRepo;
-    @Autowired
-    ProductRepo productRepo;
-    @Autowired
     MyUserCredentialsRepo myUserCredentialsRepo;
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    public boolean isAuthorized(long userId) {
+        return userId == getLoggedInUserId() || isAdmin();
+    }
 
-    public int addUser(SignUpDTO signUpDTO) {
+    public boolean isAdmin() {
+        return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+                .getMyUserCredentials()
+                .getAuthorities()
+                .equalsIgnoreCase("ROLE_ADMIN");
+    }
+
+    public boolean existsById(long userId){
+        return myUserRepo.existsByUserId(userId);
+    }
+
+    public long addUser(SignUpDTO signUpDTO) {
         if (!signUpDTO.isValid()) {
             return -1;
         }
@@ -41,7 +53,7 @@ public class UserManager {
         tmp.setName(signUpDTO.getName());
         tmp.setEmail(signUpDTO.getEmail());
         tmp.setCart(cartRepo.save(new Cart()));
-        tmp = myUserRepo.save(tmp);
+        myUserRepo.save(tmp);
         MyUserCredentials myUserCredentials = new MyUserCredentials();
         myUserCredentials.setEmail(signUpDTO.getEmail());
         //TODO make sure javascript encodes into base64 and password is never decoded from base64
@@ -52,81 +64,32 @@ public class UserManager {
         return tmp.getUserId();
     }
 
-    public int getLoggedInUserId() {
+    public long getLoggedInUserId() {
         return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMyUserCredentials().getUserId();
     }
 
-    public MyUser getLoggedInUser() {
-        return myUserRepo.getByUserId(getLoggedInUserId());
+    public MyUser getUserById(long userId) {
+        return myUserRepo.getByUserId(userId);
     }
 
     public boolean updateUser(UserProfileDTO userProfileDTO) {
-        if (userProfileDTO.getUserId() != getLoggedInUserId()) {
+        if (!isAuthorized(userProfileDTO.getUserId())) {
             return false;
         }
-        MyUser myUser = getLoggedInUser();
+        MyUser myUser = getUserById(userProfileDTO.getUserId());
         myUser.setDTO(userProfileDTO);
         myUserRepo.save(myUser);
         return true;
     }
 
-    public UserProfileDTO getUserProfileById(int id) {
-        if (id == getLoggedInUserId() && myUserRepo.existsByUserId(id)) {
-            return myUserRepo.getByUserId(id).getDTO();
-        }
-        return null;
-    }
-
-    public Cart getUserCart(int userId) {
-        if (userId != getLoggedInUserId()) {
-            return null;
-        }
-        return myUserRepo.getByUserId(userId).getCart();
-    }
-
-    public CartItem getCartItem(int userId, int cartItemId) {
-        Cart cart = getUserCart(userId);
-        if (Objects.nonNull(cart)) {
-            for (CartItem cartItem : cart.getProducts()) {
-                if (cartItem.getCartItemId() == cartItemId) {
-                    return cartItem;
-                }
-            }
-        }
-        return null;
-    }
-
-    public CartItem addProductToCart(int userId, int productId) {
-        if (userId != getLoggedInUserId()) {
-            return null;
-        }
-        if (!productRepo.existsByProductId(productId)) {
-            return null;
-        }
-        boolean found = false;
-        CartItem cartItemFound = null;
-        MyUser myUser = getLoggedInUser();
-        Cart cart = myUser.getCart();
-        Product product = productRepo.findByProductId(productId);
-        for (CartItem cartItem : cart.getProducts()) {
-            if (cartItem.getProduct().equals(product)) {
-                cartItem.setQuantity(cartItem.getQuantity() + 1);
-                cartItemFound = cartItemRepo.save(cartItem);
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            cartItemFound = new CartItem();
-            cartItemFound.setProduct(product);
-            cartItemFound.setQuantity(1);
-            cart.getProducts().add(cartItemFound);
-            cartItemFound = cartItemRepo.save(cartItemFound);
-        }
-
-
-        cartRepo.save(cart);
+    public void updateUser(MyUser myUser) {
         myUserRepo.save(myUser);
-        return cartItemFound;
+    }
+
+    public UserProfileDTO getUserProfileById(long userId) {
+        if (isAuthorized(userId) && myUserRepo.existsByUserId(userId)) {
+            return getUserById(userId).getDTO();
+        }
+        return null;
     }
 }

@@ -3,18 +3,18 @@ package com.beehyv.case_study.dto;
 import java.util.Objects;
 
 public class ProductDTO {
-    private int productId;
+    private long productId;
     private String name;
     private int price;
     private String details;
     private String category;
     private String subcategory;
 
-    public int getProductId() {
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
     }
 

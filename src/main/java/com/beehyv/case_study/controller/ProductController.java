@@ -50,7 +50,7 @@ public class ProductController {
     @GetMapping("/getById/{productId}")
     public ResponseEntity getProductById(@PathVariable String productId) {
         try {
-            ProductDTO productDTO = productManager.getProductById(Integer.parseInt(productId));
+            ProductDTO productDTO = productManager.getProductById(Long.parseLong(productId));
             if (productDTO != null) {
                 return ResponseEntity.ok().body(productDTO);
             }

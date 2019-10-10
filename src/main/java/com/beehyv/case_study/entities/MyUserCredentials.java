@@ -6,18 +6,18 @@ import javax.persistence.*;
 public class MyUserCredentials {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private long userId;
     private String password;
     private String email;
     @OneToOne
     private MyUser myUser;
     private String authorities;
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

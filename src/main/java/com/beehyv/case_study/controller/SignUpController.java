@@ -24,7 +24,7 @@ public class SignUpController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
-        int id = userManager.addUser(signUpDTO);
+        long id = userManager.addUser(signUpDTO);
         if (id < 0) {
             return ResponseEntity.badRequest().build();
         }

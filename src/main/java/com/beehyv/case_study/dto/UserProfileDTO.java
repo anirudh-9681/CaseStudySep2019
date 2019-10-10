@@ -1,21 +1,22 @@
 package com.beehyv.case_study.dto;
 
 import com.beehyv.case_study.utilities.Address;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
 public class UserProfileDTO{
-    private int userId;
+    private long userId;
     private String name;
     private String email;
     private String phone;
     private Address address;
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -51,6 +52,7 @@ public class UserProfileDTO{
         this.address = address;
     }
 
+    @JsonIgnore
     public boolean isValid(){
         return !Objects.isNull(name) && !Objects.isNull(email) && !Objects.isNull(phone) && !Objects.isNull(address);
     }
