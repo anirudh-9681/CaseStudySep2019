@@ -1,6 +1,7 @@
 package com.beehyv.case_study.services;
 
 import com.beehyv.case_study.dto.ProductDTO;
+import com.beehyv.case_study.dto.QuantityDTO;
 import com.beehyv.case_study.entities.Cart;
 import com.beehyv.case_study.entities.CartItem;
 import com.beehyv.case_study.entities.MyUser;
@@ -78,24 +79,23 @@ public class CartManager {
     }
 
     public ProductDTO removeProductFromCart(long userId, long productId) {
-        if (!userManager.isAuthorized(userId)){
+        if (!userManager.isAuthorized(userId)) {
             return null;
         }
         if (!productRepo.existsByProductId(productId)) {
             return null;
         }
         Product product = productRepo.findByProductId(productId);
-        MyUser myUser = userManager.getUserById(userId);
-        Cart cart = myUser.getCart();
+        Cart cart = getUserCart(userId);
         for (CartItem cartItem : cart.getProducts()) {
             if (cartItem.getProduct().equals(product)) {
-                if (cartItem.getQuantity() == 1){
+                if (cartItem.getQuantity() == 1) {
                     cartItemRepo.delete(cartItem);
                     cart.getProducts().remove(cartItem);
                     cartRepo.save(cart);
                     return product.getDTO();
-                }else if (cartItem.getQuantity() > 1){
-                    cartItem.setQuantity(cartItem.getQuantity()-1);
+                } else if (cartItem.getQuantity() > 1) {
+                    cartItem.setQuantity(cartItem.getQuantity() - 1);
                     cartItemRepo.save(cartItem);
 //                    cartRepo.save(cart);
                     return product.getDTO();
@@ -105,4 +105,48 @@ public class CartManager {
         return null;
     }
 
+    public CartItem changeCartItemQuantity(long cartItemId, QuantityDTO quantityDTO) {
+        if (userManager.isAdmin()) {
+            CartItem cartItem = cartItemRepo.findByCartItemId(cartItemId);
+            cartItem.setQuantity(quantityDTO.getQuantity());
+            if (quantityDTO.getQuantity() == 0) {
+                cartItemRepo.delete(cartItem);
+            } else {
+                cartItemRepo.save(cartItem);
+            }
+            return cartItem;
+        }
+        long userId = userManager.getLoggedInUserId();
+        Cart cart = getUserCart(userId);
+        for (CartItem cartItem : cart.getProducts()) {
+            if (cartItem.getCartItemId() == cartItemId) {
+                cartItem.setQuantity(quantityDTO.getQuantity());
+                if (quantityDTO.getQuantity() == 0) {
+                    cartItemRepo.delete(cartItem);
+                } else {
+                    cartItemRepo.save(cartItem);
+                }
+                return cartItem;
+            }
+        }
+        return null;
+    }
+
+    public CartItem changeCartItemQuantity(long userId, long productId, QuantityDTO quantityDTO){
+        if (userManager.isAuthorized(userId)){
+            Cart cart = getUserCart(userId);
+            for (CartItem cartItem : cart.getProducts()){
+                if (cartItem.getProduct().getProductId() == productId){
+                    cartItem.setQuantity(quantityDTO.getQuantity());
+                    if (quantityDTO.getQuantity() == 0) {
+                        cartItemRepo.delete(cartItem);
+                    } else {
+                        cartItemRepo.save(cartItem);
+                    }
+                    return cartItem;
+                }
+            }
+        }
+        return null;
+    }
 }

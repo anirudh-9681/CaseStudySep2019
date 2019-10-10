@@ -1,16 +1,16 @@
 package com.beehyv.case_study.controller;
 
 import com.beehyv.case_study.dto.ProductDTO;
+import com.beehyv.case_study.dto.QuantityDTO;
 import com.beehyv.case_study.entities.Cart;
 import com.beehyv.case_study.entities.CartItem;
 import com.beehyv.case_study.services.CartManager;
+import com.beehyv.case_study.utilities.ObjectMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Objects;
 
 @RestController
@@ -70,15 +70,61 @@ public class CartController {
                     Long.parseLong(userId),
                     Long.parseLong(productId)
             );
-            if (Objects.nonNull(productDTO)){
+            if (Objects.nonNull(productDTO)) {
                 String response = productDTO.getName() + " removed from cart.";
                 return ResponseEntity.ok().body(response);
             }
 
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return ResponseEntity.badRequest().build();
 
+    }
+
+    @PostMapping(value = {"/{userId}/changeQuantity/{productId}", "/changeQuantity/{cartItemId}"})
+    public ResponseEntity changeProductQuantityInCart(
+            @PathVariable(required = false) String userId,
+            @PathVariable(required = false) String productId,
+            @PathVariable(required = false) String cartItemId,
+            @RequestBody String json) {
+
+        QuantityDTO quantityDTO;
+        try {
+            quantityDTO = ObjectMapperImpl.getObjectFromJson(json, QuantityDTO.class);
+
+            //Check if Quantity DTO is actually a valid one (non - negative)
+            if (quantityDTO.isValid()) {
+
+                //if - else block deals with two methods of making post request
+                if (Objects.nonNull(cartItemId)) {
+                    try {
+                        CartItem cartItem = cartManager.changeCartItemQuantity(
+                                Long.parseLong(cartItemId),
+                                quantityDTO);
+                        if (Objects.nonNull(cartItem)) {
+                            return ResponseEntity.ok().body(cartItem);
+                        }
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                } else if (Objects.nonNull(userId) && Objects.nonNull(productId)) {
+                    try {
+                        CartItem cartItem = cartManager.changeCartItemQuantity(
+                                Long.parseLong(userId),
+                                Long.parseLong(productId),
+                                quantityDTO);
+                        if (Objects.nonNull(cartItem)) {
+                            return ResponseEntity.ok().body(cartItem);
+                        }
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

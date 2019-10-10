@@ -10,9 +10,13 @@ import com.beehyv.case_study.repositories.MyUserCredentialsRepo;
 import com.beehyv.case_study.repositories.MyUserRepo;
 import com.beehyv.case_study.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class UserManager {
@@ -27,14 +31,16 @@ public class UserManager {
     PasswordEncoder passwordEncoder;
 
     public boolean isAuthorized(long userId) {
-        return userId == getLoggedInUserId() || isAdmin();
+        return isAdmin() || userId == getLoggedInUserId();
     }
 
     public boolean isAdmin() {
-        return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-                .getMyUserCredentials()
+        return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
                 .getAuthorities()
-                .equalsIgnoreCase("ROLE_ADMIN");
+                .stream()
+                .filter(o -> ((GrantedAuthority) o).getAuthority().equalsIgnoreCase("ROLE_ADMIN"))
+                .collect(Collectors.toList())
+                .size() == 1;
     }
 
     public boolean existsById(long userId){
