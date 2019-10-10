@@ -35,7 +35,13 @@ public class FilterSpecification implements Specification<Product> {
         }
 
         if (map.containsKey("subcategory")) {
-            predicates.add(criteriaBuilder.like(root.get("subcategory"), map.get("subcategory")));
+            String subcategory = map.get("subcategory");
+            if (subcategory.matches("^\\[.*]$")){
+                subcategory = subcategory.substring(1,subcategory.length()-1);
+            }
+            for (String s : subcategory.split(",")){
+                predicates.add(criteriaBuilder.like(root.get("subcategory"), s));
+            }
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

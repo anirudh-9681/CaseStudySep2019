@@ -66,7 +66,7 @@ public class ProductManager {
     }
 
     public List<ProductDTO> searchByName(String searchString){
-        return productRepo.findAllByNameIgnoreCase(searchString)
+        return productRepo.findAllByNameContaining(searchString)
                 .stream()
                 .filter(Objects::nonNull)
                 .map(Product::getDTO)
