@@ -25,6 +25,9 @@ public class CartManager {
     @Autowired
     CartItemRepo cartItemRepo;
 
+    public void updateCart(Cart cart){
+        cartRepo.save(cart);
+    }
 
     public Cart getUserCart(long userId) {
         if (!userManager.isAuthorized(userId)) {
@@ -63,7 +66,7 @@ public class CartManager {
             if (cartItem.getProduct().equals(product)) {
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
                 cartItemRepo.save(cartItem);
-                cartRepo.save(cart);
+                updateCart(cart);
                 return cartItem;
             }
         }
@@ -73,7 +76,7 @@ public class CartManager {
         cartItem.setQuantity(1);
         cart.getProducts().add(cartItem);
         cartItemRepo.save(cartItem);
-        cartRepo.save(cart);
+        updateCart(cart);
         userManager.updateUser(myUser);
         return cartItem;
     }
@@ -92,12 +95,12 @@ public class CartManager {
                 if (cartItem.getQuantity() == 1) {
                     cartItemRepo.delete(cartItem);
                     cart.getProducts().remove(cartItem);
-                    cartRepo.save(cart);
+                    updateCart(cart);
                     return product.getDTO();
                 } else if (cartItem.getQuantity() > 1) {
                     cartItem.setQuantity(cartItem.getQuantity() - 1);
                     cartItemRepo.save(cartItem);
-//                    cartRepo.save(cart);
+//                    updateCart(cart);
                     return product.getDTO();
                 }
             }

@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,6 +60,7 @@ public class UserManager {
         tmp.setName(signUpDTO.getName());
         tmp.setEmail(signUpDTO.getEmail());
         tmp.setCart(cartRepo.save(new Cart()));
+        tmp.setOrders(new ArrayList<>());
         myUserRepo.save(tmp);
         MyUserCredentials myUserCredentials = new MyUserCredentials();
         myUserCredentials.setEmail(signUpDTO.getEmail());
@@ -71,6 +73,9 @@ public class UserManager {
     }
 
     public long getLoggedInUserId() {
+        if (isAdmin()){
+            return 0;
+        }
         return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMyUserCredentials().getUserId();
     }
 

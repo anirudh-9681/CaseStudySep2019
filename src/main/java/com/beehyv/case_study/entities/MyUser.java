@@ -5,6 +5,7 @@ import com.beehyv.case_study.utilities.Address;
 import com.beehyv.case_study.utilities.AddressFormatter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +18,9 @@ public class MyUser {
     private String phone;
     @OneToOne
     private Cart cart;
+
+    @OneToMany
+    private List<Order> orders;
 
     @Convert(converter = AddressFormatter.class)
     private Address address;
@@ -67,6 +71,14 @@ public class MyUser {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public UserProfileDTO getDTO(){
