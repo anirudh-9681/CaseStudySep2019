@@ -59,7 +59,7 @@ public class UserManager {
         MyUser tmp = new MyUser();
         tmp.setName(signUpDTO.getName());
         tmp.setEmail(signUpDTO.getEmail());
-        tmp.setCart(cartRepo.save(new Cart())); //FIXME uncomment this!
+        tmp.setCart(cartRepo.save(new Cart()));
         tmp.setOrders(new ArrayList<>());
         myUserRepo.save(tmp);
         MyUserCredentials myUserCredentials = new MyUserCredentials();
