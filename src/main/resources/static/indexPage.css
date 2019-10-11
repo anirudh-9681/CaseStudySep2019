@@ -1,0 +1,22 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  outline: none;
+}
+
+#searchContainer {
+  position: relative;
+}
+
+#searchBar {
+  width: 40vw;
+}
+
+#searchButton {
+  position: absolute;
+  height: 38px;
+  top: 0;
+  right: 0;
+}
