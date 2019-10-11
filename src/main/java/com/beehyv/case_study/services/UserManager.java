@@ -36,10 +36,11 @@ public class UserManager {
     }
 
     public boolean isAdmin() {
+        // Can also return getLoggedInUserId() == 1; Since ADMIN is the first created user in database.
         return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
                 .getAuthorities()
                 .stream()
-                .filter(o -> ((GrantedAuthority) o).getAuthority().equalsIgnoreCase("ROLE_ADMIN"))
+                .filter(o -> ((GrantedAuthority) o).getAuthority().equalsIgnoreCase("ADMIN"))
                 .collect(Collectors.toList())
                 .size() == 1;
     }

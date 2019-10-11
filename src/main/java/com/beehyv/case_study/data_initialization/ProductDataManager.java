@@ -10,7 +10,7 @@ import org.springframework.core.io.ResourceLoader;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class DataManager {
+public class ProductDataManager {
 
     private ResourceLoader resourceLoader;
     private ProductRepo productRepo;
