@@ -4,22 +4,24 @@ import com.beehyv.case_study.dto.ProductDTO;
 import com.beehyv.case_study.entities.Product;
 import com.beehyv.case_study.repositories.ProductRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-@Component
 public class DataManager {
 
-    @Autowired
-    ProductRepo productRepo;
+    private ResourceLoader resourceLoader;
+    private ProductRepo productRepo;
 
-    @Autowired
-    ResourceLoader resourceLoader;
+    public void setResourceLoader(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
+    public void setProductRepo(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
 
     public ProductDTO[] readFromJsonFile() throws IOException {
         System.out.println(resourceLoader);
