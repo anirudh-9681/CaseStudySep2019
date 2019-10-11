@@ -68,15 +68,16 @@ public class Product {
         this.subcategory = subcategory;
     }
 
-    public void setDTO(ProductDTO productDTO){
+    public void setDTO(ProductDTO productDTO) {
         if (Objects.nonNull(productDTO.getName())) name = productDTO.getName();
         if (productDTO.getPrice() != 0) price = productDTO.getPrice();
         if (Objects.nonNull(productDTO.getDetails())) details = productDTO.getDetails();
         if (Objects.nonNull(productDTO.getCategory())) category = productDTO.getCategory();
         if (Objects.nonNull(productDTO.getSubcategory())) subcategory = productDTO.getSubcategory();
     }
+
     @JsonIgnore
-    public ProductDTO getDTO(){
+    public ProductDTO getDTO() {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProductId(productId);
         productDTO.setName(name);

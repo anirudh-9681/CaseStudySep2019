@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
-public class UserProfileDTO{
+public class UserProfileDTO {
     private long userId;
     private String name;
     private String email;
@@ -53,7 +53,7 @@ public class UserProfileDTO{
     }
 
     @JsonIgnore
-    public boolean isValid(){
+    public boolean isValid() {
         return !Objects.isNull(name) && !Objects.isNull(email) && !Objects.isNull(phone) && !Objects.isNull(address);
     }
 }

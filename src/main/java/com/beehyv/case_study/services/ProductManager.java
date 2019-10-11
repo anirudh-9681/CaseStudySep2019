@@ -16,40 +16,40 @@ public class ProductManager {
     @Autowired
     ProductRepo productRepo;
 
-    public ProductDTO addProduct(ProductDTO productDTO){
-        if(productRepo.existsByProductId(productDTO.getProductId())){
+    public ProductDTO addProduct(ProductDTO productDTO) {
+        if (productRepo.existsByProductId(productDTO.getProductId())) {
             return null;
         }
         Product product = new Product();
         product.setDTO(productDTO);
         try {
             return productRepo.save(product).getDTO();
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return null;
         }
     }
 
-    public ProductDTO updateProduct(ProductDTO productDTO){
-        if(productRepo.existsByProductId(productDTO.getProductId())){
+    public ProductDTO updateProduct(ProductDTO productDTO) {
+        if (productRepo.existsByProductId(productDTO.getProductId())) {
             Product product = productRepo.findByProductId(productDTO.getProductId());
             product.setDTO(productDTO);
-            try{
+            try {
                 return productRepo.save(product).getDTO();
-            }catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         }
         return null;
     }
 
-    public ProductDTO getProductById(long productId){
-        if(productRepo.existsByProductId(productId)){
+    public ProductDTO getProductById(long productId) {
+        if (productRepo.existsByProductId(productId)) {
             return productRepo.findByProductId(productId).getDTO();
         }
         return null;
     }
 
-    public List<ProductDTO> searchBySubCategory(String searchString){
+    public List<ProductDTO> searchBySubCategory(String searchString) {
         return productRepo.findAllBySubcategoryContaining(searchString)
                 .stream()
                 .filter(Objects::nonNull)
@@ -57,7 +57,7 @@ public class ProductManager {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductDTO> searchByCategory(String searchString){
+    public List<ProductDTO> searchByCategory(String searchString) {
         return productRepo.findAllByCategoryContaining(searchString)
                 .stream()
                 .filter(Objects::nonNull)
@@ -65,7 +65,7 @@ public class ProductManager {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductDTO> searchByName(String searchString){
+    public List<ProductDTO> searchByName(String searchString) {
         return productRepo.findAllByNameContaining(searchString)
                 .stream()
                 .filter(Objects::nonNull)
@@ -73,7 +73,7 @@ public class ProductManager {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductDTO> searchByDetail(String searchString){
+    public List<ProductDTO> searchByDetail(String searchString) {
         return productRepo.findAllByDetailsContaining(searchString)
                 .stream()
                 .filter(Objects::nonNull)
@@ -81,7 +81,7 @@ public class ProductManager {
                 .collect(Collectors.toList());
     }
 
-    public Set<ProductDTO> searchByString(String searchString){
+    public Set<ProductDTO> searchByString(String searchString) {
 
         return Stream.of(
                 searchByName(searchString),
@@ -93,7 +93,7 @@ public class ProductManager {
                 .collect(Collectors.toSet());
     }
 
-    public Set<ProductDTO> searchWithFilters(Map<String,String> map){
+    public Set<ProductDTO> searchWithFilters(Map<String, String> map) {
         FilterSpecification filterSpecification = new FilterSpecification(map);
         return productRepo.findAll(filterSpecification)
                 .stream()

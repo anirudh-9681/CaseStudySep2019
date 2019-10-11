@@ -81,7 +81,7 @@ public class MyUser {
         this.orders = orders;
     }
 
-    public UserProfileDTO getDTO(){
+    public UserProfileDTO getDTO() {
         UserProfileDTO userProfileDTO = new UserProfileDTO();
         userProfileDTO.setUserId(userId);
         userProfileDTO.setName(name);
@@ -91,7 +91,7 @@ public class MyUser {
         return userProfileDTO;
     }
 
-    public void setDTO(UserProfileDTO userProfileDTO){
+    public void setDTO(UserProfileDTO userProfileDTO) {
 //        userId = userProfileDTO.getUserId(); // never change userId even though in this case, replacing with same value
         if (Objects.nonNull(userProfileDTO.getName())) name = userProfileDTO.getName();
         if (Objects.nonNull(userProfileDTO.getEmail())) email = userProfileDTO.getEmail();

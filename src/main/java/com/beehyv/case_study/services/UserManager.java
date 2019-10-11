@@ -44,7 +44,7 @@ public class UserManager {
                 .size() == 1;
     }
 
-    public boolean existsById(long userId){
+    public boolean existsById(long userId) {
         return myUserRepo.existsByUserId(userId);
     }
 
@@ -73,7 +73,7 @@ public class UserManager {
     }
 
     public long getLoggedInUserId() {
-        if (isAdmin()){
+        if (isAdmin()) {
             return 0;
         }
         return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMyUserCredentials().getUserId();

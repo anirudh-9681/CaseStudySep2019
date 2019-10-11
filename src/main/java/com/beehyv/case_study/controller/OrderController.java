@@ -20,30 +20,30 @@ public class OrderController {
     OrderManager orderManager;
 
     @GetMapping("/{userId}/getOrders")
-    public ResponseEntity getUserOrders(@PathVariable String userId){
+    public ResponseEntity getUserOrders(@PathVariable String userId) {
         try {
             List<Order> orders = orderManager.getUserOrders(
                     Long.parseLong(userId)
             );
-            if (Objects.nonNull(orders)){
+            if (Objects.nonNull(orders)) {
                 return ResponseEntity.ok().body(orders);
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{userId}/createOrder")
-    public ResponseEntity createOrder(@PathVariable String userId){
+    public ResponseEntity createOrder(@PathVariable String userId) {
         try {
             Order order = orderManager.createOrder(
                     Long.parseLong(userId)
             );
-            if (Objects.nonNull(order)){
+            if (Objects.nonNull(order)) {
                 return ResponseEntity.ok().body(order);
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return ResponseEntity.badRequest().build();

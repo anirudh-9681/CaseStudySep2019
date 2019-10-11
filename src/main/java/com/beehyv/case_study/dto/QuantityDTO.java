@@ -4,9 +4,10 @@ public class QuantityDTO {
 
     private int quantity;
 
-    public QuantityDTO(){}
+    public QuantityDTO() {
+    }
 
-    public QuantityDTO(int quantity){
+    public QuantityDTO(int quantity) {
         this.quantity = quantity;
     }
 
@@ -18,7 +19,7 @@ public class QuantityDTO {
         this.quantity = quantity;
     }
 
-    public boolean isValid(){
+    public boolean isValid() {
         return quantity >= 0;
     }
 }

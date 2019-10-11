@@ -22,7 +22,7 @@ public class AddressFormatter implements AttributeConverter<Address, String> {
     @Override
     public Address convertToEntityAttribute(String dbData) {
         try {
-            return ObjectMapperImpl.getObjectFromJson(dbData,Address.class);
+            return ObjectMapperImpl.getObjectFromJson(dbData, Address.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

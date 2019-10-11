@@ -1,0 +1,9 @@
+[
+  {
+    "name": "xyz",
+    "price": 394,
+    "details": "A test product that's useful for testing",
+    "category": "Test",
+    "subcategory": "[bikes , mobiles]"
+  }
+]

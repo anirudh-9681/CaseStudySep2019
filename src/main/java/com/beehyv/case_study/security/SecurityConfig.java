@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     LoginFailure loginFailure;
     @Autowired
     LogoutSuccessHandlerImpl logoutSuccessHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -42,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/home","/getProfile/*","/updateProfile").hasAnyAuthority("USER", "ROLE_ADMIN")
+                .antMatchers("/home", "/getProfile/*", "/updateProfile").hasAnyAuthority("USER", "ROLE_ADMIN")
 //                .antMatchers("/login").anonymous() //TODO how to make sure only logged out users can access login page?
                 .antMatchers("/**").permitAll() // check /* and /**
                 .and()

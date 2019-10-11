@@ -20,7 +20,7 @@ public class SignUpController {
     ResponseEntity commitNewUser(@RequestBody String json) {
         SignUpDTO signUpDTO;
         try {
-            signUpDTO = ObjectMapperImpl.getObjectFromJson(json,SignUpDTO.class);
+            signUpDTO = ObjectMapperImpl.getObjectFromJson(json, SignUpDTO.class);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

@@ -25,7 +25,7 @@ public class CartManager {
     @Autowired
     CartItemRepo cartItemRepo;
 
-    public void updateCart(Cart cart){
+    public void updateCart(Cart cart) {
         cartRepo.save(cart);
     }
 
@@ -135,11 +135,11 @@ public class CartManager {
         return null;
     }
 
-    public CartItem changeCartItemQuantity(long userId, long productId, QuantityDTO quantityDTO){
-        if (userManager.isAuthorized(userId)){
+    public CartItem changeCartItemQuantity(long userId, long productId, QuantityDTO quantityDTO) {
+        if (userManager.isAuthorized(userId)) {
             Cart cart = getUserCart(userId);
-            for (CartItem cartItem : cart.getProducts()){
-                if (cartItem.getProduct().getProductId() == productId){
+            for (CartItem cartItem : cart.getProducts()) {
+                if (cartItem.getProduct().getProductId() == productId) {
                     cartItem.setQuantity(quantityDTO.getQuantity());
                     if (quantityDTO.getQuantity() == 0) {
                         cartItemRepo.delete(cartItem);

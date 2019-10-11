@@ -53,7 +53,7 @@ public class ProductController {
             if (productDTO != null) {
                 return ResponseEntity.ok().body(productDTO);
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
@@ -75,13 +75,13 @@ public class ProductController {
     }
 
     @PostMapping("/{categoryName}/getFilteredProducts")
-    public ResponseEntity getFilteredProducts(@PathVariable String categoryName, @RequestBody String json){
+    public ResponseEntity getFilteredProducts(@PathVariable String categoryName, @RequestBody String json) {
         try {
             @SuppressWarnings("unchecked")
-            Map<String,String> map = ObjectMapperImpl.getObjectFromJson(json, Map.class);
-            map.put("category",categoryName);
+            Map<String, String> map = ObjectMapperImpl.getObjectFromJson(json, Map.class);
+            map.put("category", categoryName);
             Set<ProductDTO> productDTOs = productManager.searchWithFilters(map);
-            if (productDTOs != null){
+            if (productDTOs != null) {
                 return ResponseEntity.ok().body(productDTOs);
             }
         } catch (IOException e) {

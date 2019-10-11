@@ -24,8 +24,8 @@ public class OrderManager {
     @Autowired
     CartItemRepo cartItemRepo;
 
-    public List<Order> getUserOrders(long userId){
-        if (userManager.isAuthorized(userId)){
+    public List<Order> getUserOrders(long userId) {
+        if (userManager.isAuthorized(userId)) {
             MyUser myUser = userManager.getUserById(userId);
             List<Order> orders = myUser.getOrders();
             return orders;
@@ -34,21 +34,21 @@ public class OrderManager {
     }
 
     public Order createOrder(long userId) {
-        if (!userManager.isAuthorized(userId)){
+        if (!userManager.isAuthorized(userId)) {
             return null;
         }
         MyUser myUser = userManager.getUserById(userId);
         List<OrderItem> orderItems = myUser.getCart().getProducts()
-                                            .stream()
-                                            .map(cartItem -> {
-                                                    OrderItem orderItem = new OrderItem();
-                                                    orderItem.setProduct(cartItem.getProduct());
-                                                    orderItem.setQuantity(cartItem.getQuantity());
-                                                    orderItemRepo.save(orderItem);
-                                                    cartItemRepo.delete(cartItem);
-                                                    return orderItem;
-                                                })
-                                            .collect(Collectors.toList());
+                .stream()
+                .map(cartItem -> {
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.setProduct(cartItem.getProduct());
+                    orderItem.setQuantity(cartItem.getQuantity());
+                    orderItemRepo.save(orderItem);
+                    cartItemRepo.delete(cartItem);
+                    return orderItem;
+                })
+                .collect(Collectors.toList());
         Order order = new Order();
         order.setOrderStatus(OrderStatus.PROCESSING);
         order.setProducts(orderItems);

@@ -31,7 +31,7 @@ public class SignUpDTO {
         this.password = password;
     }
 
-    public boolean isValid(){
+    public boolean isValid() {
         return !Objects.isNull(name) && !Objects.isNull(email) && !Objects.isNull(password);
     }
 }

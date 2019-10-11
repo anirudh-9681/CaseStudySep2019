@@ -8,12 +8,12 @@ public class UserIdDTO {
     @JsonProperty(value = "userId")
     private long userId;
 
-    public UserIdDTO(){
+    public UserIdDTO() {
 
     }
 
     @JsonCreator
-    public UserIdDTO(long userId){
+    public UserIdDTO(long userId) {
         this.userId = userId;
     }
 

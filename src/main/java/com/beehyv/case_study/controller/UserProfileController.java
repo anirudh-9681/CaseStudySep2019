@@ -17,7 +17,7 @@ public class UserProfileController {
     UserManager userManager;
 
     @GetMapping("/getProfile/{userId}")
-    ResponseEntity getUserProfile(@PathVariable String userId){
+    ResponseEntity getUserProfile(@PathVariable String userId) {
         UserProfileDTO userProfileDTO = userManager.getUserProfileById(Long.parseLong(userId));
         if (userProfileDTO != null) {
             return ResponseEntity.ok().body(userProfileDTO);
@@ -26,10 +26,10 @@ public class UserProfileController {
     }
 
     @PostMapping("/updateProfile")
-    ResponseEntity updateUserProfile(@RequestBody String json){
+    ResponseEntity updateUserProfile(@RequestBody String json) {
         try {
             UserProfileDTO userProfileDTO = ObjectMapperImpl.getObjectFromJson(json, UserProfileDTO.class);
-            if(userManager.updateUser(userProfileDTO)){
+            if (userManager.updateUser(userProfileDTO)) {
                 return ResponseEntity.ok().body(new ResultDTO("success"));
             }
         } catch (IOException e) {
