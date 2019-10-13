@@ -8,10 +8,12 @@ a {
 
 #searchContainer {
   position: relative;
+  min-width: 40vw;
 }
 
 #searchBar {
-  min-width: 40vw;
+  padding-right: 5rem;
+  width: 100%;
 }
 
 #searchButton {
@@ -19,4 +21,5 @@ a {
   height: 38px;
   top: 0;
   right: 0;
+  border-radius: 0 0.25rem 0.25rem 0;
 }
