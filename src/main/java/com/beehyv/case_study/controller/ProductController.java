@@ -91,7 +91,7 @@ public class ProductController {
     }
 
     @GetMapping("/getAllCategories")
-    public ResponseEntity getAllCategories(){
+    public ResponseEntity getAllCategories() {
         return ResponseEntity.ok().body(productManager.getAllCategories());
     }
 }

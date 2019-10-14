@@ -3,12 +3,12 @@ const catTemplate = document.getElementById("categoryTemplate");
 const welcomeTemplate = document.getElementById("welcomeTemplate");
 let userName;
 const welcomeUser = function (userName) {
-    while (catContainer.firstChild){
+    while (catContainer.firstChild) {
         catContainer.removeChild(catContainer.firstChild);
     }
     const copy = welcomeTemplate.cloneNode(true).content;
     copy.children[0].children[0].innerText = `Welcome, ${userName}`;
-    catContainer.insertChildAtIndex(copy,catContainer.length);
+    catContainer.insertChildAtIndex(copy, catContainer.length);
 };
 const getUserName = function () {
     if (this.status === 200) {
@@ -16,7 +16,7 @@ const getUserName = function () {
         welcomeUser(userName);
     }
 };
-doRequest("GET","/loggedInUserName",getUserName);
+doRequest("GET", "/loggedInUserName", getUserName);
 
 let cats;
 const readCategories = function () {
@@ -35,4 +35,4 @@ function addToCategoryList(cat) {
     catContainer.insertChildAtIndex(copy, 0);
 }
 
-doRequest("GET","/products/getAllCategories",readCategories);
+doRequest("GET", "/products/getAllCategories", readCategories);

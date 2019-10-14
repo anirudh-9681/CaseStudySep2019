@@ -17,11 +17,11 @@ public class UserProfileController {
     UserManager userManager;
 
     @GetMapping("/loggedInUserName")
-    ResponseEntity checkIfLoggedIn(){
-        try{
+    ResponseEntity checkIfLoggedIn() {
+        try {
             String name = userManager.getUserById(userManager.getLoggedInUserId()).getName();
             return ResponseEntity.ok().body(name);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }

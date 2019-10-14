@@ -19,7 +19,7 @@ public class UserDataManager {
     }
 
     public void run(String admin_username, String admin_password) {
-        if (myUserCredentialsRepo.count() != 0){
+        if (myUserCredentialsRepo.count() != 0) {
             return;
         }
         MyUser tmp = new MyUser();

@@ -102,9 +102,9 @@ public class ProductManager {
                 .collect(Collectors.toSet());
     }
 
-    public Set<String> getAllCategories(){
+    public Set<String> getAllCategories() {
         Set<String> categories = new HashSet<>();
-        for (Product product: productRepo.findAll()){
+        for (Product product : productRepo.findAll()) {
             categories.add(product.getCategory());
         }
         return categories;

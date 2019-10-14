@@ -12,7 +12,8 @@ function doRequest(method, url, callback, body, form) {
     const newUrl = `http://${location.host}${url}`;
     xhr.open(method, newUrl, true);
     if (form) {
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.withCredentials = true;
+        console.log("a form is sent");
     } else {
         xhr.setRequestHeader("Content-Type", "application/json");
     }
