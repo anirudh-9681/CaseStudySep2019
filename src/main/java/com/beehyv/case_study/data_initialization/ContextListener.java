@@ -1,13 +1,11 @@
 package com.beehyv.case_study.data_initialization;
 
-import com.beehyv.case_study.entities.MyUserCredentials;
 import com.beehyv.case_study.repositories.MyUserCredentialsRepo;
 import com.beehyv.case_study.repositories.MyUserRepo;
 import com.beehyv.case_study.repositories.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.crypto.password.PasswordEncoder;
