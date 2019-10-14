@@ -16,6 +16,16 @@ public class UserProfileController {
     @Autowired
     UserManager userManager;
 
+    @GetMapping("/loggedInUserName")
+    ResponseEntity checkIfLoggedIn(){
+        try{
+            String name = userManager.getUserById(userManager.getLoggedInUserId()).getName();
+            return ResponseEntity.ok().body(name);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @GetMapping("/getProfile/{userId}")
     ResponseEntity getUserProfile(@PathVariable String userId) {
         UserProfileDTO userProfileDTO = userManager.getUserProfileById(Long.parseLong(userId));

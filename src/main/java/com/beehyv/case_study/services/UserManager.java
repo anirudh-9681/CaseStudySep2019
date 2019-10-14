@@ -74,9 +74,6 @@ public class UserManager {
     }
 
     public long getLoggedInUserId() {
-        if (isAdmin()) {
-            return 0;
-        }
         return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMyUserCredentials().getUserId();
     }
 

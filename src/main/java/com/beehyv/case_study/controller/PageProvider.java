@@ -22,9 +22,9 @@ public class PageProvider {
         return "mainPage.html";
     }
 
-    @GetMapping("/failed")
+    @GetMapping("/login")
     String getFailedPage() {
-        return "failed.html";
+        return "loginPage.html";
     }
 
 }

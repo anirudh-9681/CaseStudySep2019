@@ -11,16 +11,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="indexPage.css">
+    <link rel="stylesheet" href="css/indexPage.css">
     <link rel="shortcut icon" href="images/logo-black.ico" type="image/x-icon">
     <title>Shop</title>
-    <script src="js/XHR.js"></script>
+    <script src="js/site-utils.js"></script>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand font-weight-bold" id="siteName" href="#">
+            <a class="navbar-brand font-weight-bold" id="siteName" href="/">
                 <img class="rounded mx-3" src="images/logo.ico" alt="A logo" width="50">
                 SHOP
             </a>
@@ -44,20 +44,23 @@
         </nav>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 py-md-1">
             <div class="collapse navbar-collapse mr-0 mb-3 mb-md-0" id="navbarSupportedContent">
+                <template id="categoryTemplate">
+                    <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category A</a>
+                    </li>
+                </template>
+                <template id="welcomeTemplate">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Account Settings</a>
+                            <a class="dropdown-item" href="#">Log Out</a>
+                            <a class="dropdown-item" href="#">Cart</a>
+                            <a class="dropdown-item" href="#">Orders</a>
+                        </div>
+                    </div>
+                </template>
                 <ul class="navbar-nav w-100" id="categoryContainer">
-                    <template id="categoryTemplate">
-                        <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category A</a>
-                        </li>
-                    </template>
-                    <!-- <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category A</a>
-                    </li>
-                    <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category B</a>
-                    </li>
-                    <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category C</a>
-                    </li>
-                    <li class="nav-item col ml-1 mr-auto text-center"><a href="#" class="nav-link text-light">Category
-                            D</a>
-                    </li> -->
                     <li class="nav-item mx-3 text-center">
                         <a class="nav-link text-light" href="#">Login</a>
                     </li>
