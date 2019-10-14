@@ -12,16 +12,17 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="indexPage.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="images/logo-black.ico" type="image/x-icon">
+    <title>Shop</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand font-weight-bold" id="siteName" href="#">
                 <!-- TODO(Shift): Add Image source -->
-                <img class="rounded mx-3" src="" alt="A logo">
-                Navbar
+                <img class="rounded mx-3" src="images/logo.ico" alt="A logo" width="50">
+                SHOP
             </a>
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -50,7 +51,8 @@
                     </li>
                     <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category C</a>
                     </li>
-                    <li class="nav-item col ml-1 mr-auto text-center"><a href="#" class="nav-link text-light">Category D</a>
+                    <li class="nav-item col ml-1 mr-auto text-center"><a href="#" class="nav-link text-light">Category
+                            D</a>
                     </li>
                     <li class="nav-item mx-3 text-center">
                         <a class="nav-link text-light" href="#">Login</a>
@@ -69,21 +71,16 @@
                     Best-sellers
                 </h2>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <a class="text-dark" href="https://www.w3schools.com/bootstrap4/bootstrap_typography.asp">
-                        <img src="#" alt="Product Image">
-                        <h4>Product name</h4>
-                        <p>Details</p>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a class="text-dark" href="https://www.w3schools.com/bootstrap4/bootstrap_typography.asp">
-                        <img src="#" alt="Product Image">
-                        <h4>Product name</h4>
-                        <p>Details</p>
-                    </a>
-                </div>
+            <div id="bestSellers" class="row">
+                <template>
+                    <div class="col-md-3">
+                        <a class="text-dark" href="https://www.w3schools.com/bootstrap4/bootstrap_typography.asp">
+                            <img src="#" alt="Product Image">
+                            <h4>Product name</h4>
+                            <p>Details</p>
+                        </a>
+                    </div>
+                </template>
             </div>
         </div>
 

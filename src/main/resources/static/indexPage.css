@@ -6,6 +6,10 @@ a {
   outline: none;
 }
 
+#siteName {
+  color: #a9a9a9;
+}
+
 #searchContainer {
   position: relative;
   min-width: 40vw;
