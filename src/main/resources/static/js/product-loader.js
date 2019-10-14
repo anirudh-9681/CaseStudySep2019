@@ -7,15 +7,23 @@ Element.prototype.insertChildAtIndex = function (child, index) {
     }
 }
 
-var catContainer = document.getElementById("categoryContainer");
-var catTemplate = document.getElementById("categoryTemplate");
-var cats = ["Anime", "Video Game", "Comics", "Animal", "Profession"];
-for (const cat of cats) {
-    addToCategoryList(cat);
-}
+const catContainer = document.getElementById("categoryContainer");
+const catTemplate = document.getElementById("categoryTemplate");
+let cats = [];
+const readCategories = function () {
+    if (this.status == 200) {
+        cats = JSON.parse(this.response);
+        for (cat of cats) {
+            addToCategoryList(cat);
+        }
+    }
+};
+
 function addToCategoryList(cat) {
-    var copy = catTemplate.cloneNode(true).content;
+    const copy = catTemplate.cloneNode(true).content;
     copy.children[0].children[0].innerText = cat
-    copy.children[0].children[0].href = `/category/${cat}`;
+    copy.children[0].children[0].href = `/products/${cat}`;
     catContainer.insertChildAtIndex(copy, 0);
 }
+
+doRequest("GET","products/getAllCategories",readCategories);

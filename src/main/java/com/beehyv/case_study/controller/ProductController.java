@@ -89,4 +89,9 @@ public class ProductController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    @GetMapping("/getAllCategories")
+    public ResponseEntity getAllCategories(){
+        return ResponseEntity.ok().body(productManager.getAllCategories());
+    }
 }
