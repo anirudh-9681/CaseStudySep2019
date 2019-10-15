@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll() // check /* and /**
                 .and()
                 .formLogin()
-                .loginPage("/")
+                .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .successHandler(loginSuccess)
                 .failureHandler(loginFailure)

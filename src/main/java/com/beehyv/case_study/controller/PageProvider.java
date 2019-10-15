@@ -27,4 +27,9 @@ public class PageProvider {
         return "loginPage.html";
     }
 
+    @GetMapping("/signUp")
+    String getSignUp() {
+        return "signUpPage.html";
+    }
+
 }
