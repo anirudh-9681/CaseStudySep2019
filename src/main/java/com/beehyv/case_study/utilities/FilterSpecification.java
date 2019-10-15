@@ -54,7 +54,7 @@ public class FilterSpecification implements Specification<Product> {
             for (String s : subcategory.split(",")) {
 
                 //checks against a pattern so the extra '%' signs. Also trims string to remove white spaces
-                predicates.add(criteriaBuilder.like(root.get("subcategory"), "%"+s.trim()+"%"));
+                predicates.add(criteriaBuilder.like(root.get("subcategory"), "%" + s.trim() + "%"));
             }
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

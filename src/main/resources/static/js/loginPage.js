@@ -18,7 +18,7 @@ const valid = function () {
 };
 const formSubmit = function (event) {
     event.preventDefault();
-    if (!valid()){
+    if (!valid()) {
         return;
     }
     var data = new FormData();
