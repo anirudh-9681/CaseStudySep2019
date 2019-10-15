@@ -21,26 +21,40 @@ public class FilterSpecification implements Specification<Product> {
 
     @Override
     public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+        //Holds a list of predicates to be used in conjunction
         List<Predicate> predicates = new ArrayList<>();
+
+        //checks if request has minPrice property and adds a predicate
         if (map.containsKey("minPrice")) {
             predicates.add(criteriaBuilder.ge(root.get("price"),
                     Integer.parseInt(map.get("minPrice"))));
         }
+
+        //checks if request has maxPrice property and adds a predicate
         if (map.containsKey("maxPrice")) {
             predicates.add(criteriaBuilder.le(root.get("price"),
                     Integer.parseInt(map.get("maxPrice"))));
         }
+
+        //checks if request has category property and adds a predicate
         if (map.containsKey("category")) {
             predicates.add(criteriaBuilder.equal(root.get("category"), map.get("category")));
         }
 
+        //checks if request has subcategory property
         if (map.containsKey("subcategory")) {
             String subcategory = map.get("subcategory");
+
+            //check if subcategory is given in square brackets as array and removes the brackets
             if (subcategory.matches("^\\[.*]$")) {
                 subcategory = subcategory.substring(1, subcategory.length() - 1);
             }
+
+            // splits the subcategory property into different subcategories separated by commas.
             for (String s : subcategory.split(",")) {
-                predicates.add(criteriaBuilder.like(root.get("subcategory"), s));
+
+                //checks against a pattern so the extra '%' signs. Also trims string to remove white spaces
+                predicates.add(criteriaBuilder.like(root.get("subcategory"), "%"+s.trim()+"%"));
             }
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
