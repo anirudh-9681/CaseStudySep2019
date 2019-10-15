@@ -9,6 +9,7 @@ const valid = function () {
             return true;
         } else {
             message.innerText = "Password must be six characters long\n Password can only contain '0-9,a-z,A-Z,_,.,@'";
+            return false;
         }
     } else {
         message.innerText = "Bad email";
@@ -17,6 +18,9 @@ const valid = function () {
 };
 const formSubmit = function (event) {
     event.preventDefault();
+    if (!valid()){
+        return;
+    }
     var data = new FormData();
     data.append("username", email.value);
     data.append("password", btoa(password.value));
