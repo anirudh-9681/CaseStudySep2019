@@ -14,7 +14,7 @@ const welcomeUser = function (userName) {
 const readCategories = function () {
     if (this.status === 200) {
         cats = JSON.parse(this.response);
-        localStorage.setItem("cats",JSON.stringify(cats));
+        localStorage.setItem("cats", JSON.stringify(cats));
         addToCategoryList(cats);
     }
 };
@@ -28,14 +28,15 @@ function addToCategoryList(cats) {
     }
 }
 
-if(localStorage.getItem("user")===null){
+if (localStorage.getItem("user") === null) {
+    // FIXME(Shift): Uncomment this on server live
     location.href = `http://${location.host}/login`
-}else{
+} else {
     const user = JSON.parse(localStorage.getItem("user"));
     welcomeUser(user.name);
-    if(localStorage.getItem("cats")===null){
+    if (localStorage.getItem("cats") === null) {
         doRequest("GET", "/products/getAllCategories", readCategories);
-    }else{
+    } else {
         const cats = JSON.parse(localStorage.getItem("cats"));
         addToCategoryList(cats);
     }

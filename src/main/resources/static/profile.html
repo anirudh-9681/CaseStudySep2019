@@ -18,66 +18,66 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand font-weight-bold" id="siteName" href="/">
-                <img class="rounded mx-3" src="images/logo.ico" alt="A logo" width="50">
-                SHOP
-            </a>
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand font-weight-bold" id="siteName" href="/">
+            <img class="rounded mx-3" src="images/logo.ico" alt="A logo" width="50">
+            SHOP
+        </a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="container-fluid d-flex flex-column flex-md-row">
-                <form class="form-inline col col-md-8 col-lg-6 ml-md-auto mr-md-1">
-                    <div id="searchContainer" class="md-form mx-1 my-2 px-0 my-md-0 col">
-                        <input id="searchBar" class="form-control" type="text" placeholder="Search" aria-label="Search">
-                        <button id="searchButton" class="btn btn-secondary" type="submit">
-                            <i class="material-icons">
-                                search
-                            </i>
-                        </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container-fluid d-flex flex-column flex-md-row">
+            <form class="form-inline col col-md-8 col-lg-6 ml-md-auto mr-md-1">
+                <div id="searchContainer" class="md-form mx-1 my-2 px-0 my-md-0 col">
+                    <input id="searchBar" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <button id="searchButton" class="btn btn-secondary" onclick="search(event)">
+                        <i class="material-icons">
+                            search
+                        </i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 py-md-1">
+        <div class="collapse navbar-collapse mr-0 mb-3 mb-md-0" id="navbarSupportedContent">
+            <template id="categoryTemplate">
+                <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category</a>
+                </li>
+            </template>
+            <template id="welcomeTemplate">
+                <div class="dropdown">
+                    <button type="button" class="btn mx-md-auto btn-dark dropdown-toggle" data-toggle="dropdown">
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/getProfile">Account Settings</a>
+                        <a class="dropdown-item" href="#">Cart</a>
+                        <a class="dropdown-item" href="#">Orders</a>
+                        <a class="dropdown-item" href="/logout">Log Out</a>
                     </div>
-                </form>
-            </div>
-        </nav>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 py-md-1">
-            <div class="collapse navbar-collapse mr-0 mb-3 mb-md-0" id="navbarSupportedContent">
-                <template id="categoryTemplate">
-                    <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category</a>
-                    </li>
-                </template>
-                <template id="welcomeTemplate">
-                    <div class="dropdown">
-                        <button type="button" class="btn mx-md-auto btn-dark dropdown-toggle" data-toggle="dropdown">
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/getProfile">Account Settings</a>
-                            <a class="dropdown-item" href="#">Cart</a>
-                            <a class="dropdown-item" href="#">Orders</a>
-                            <a class="dropdown-item" href="/logout">Log Out</a>
-                        </div>
-                    </div>
-                </template>
-                <ul class="navbar-nav w-100" id="categoryContainer">
-                    <li class="nav-item mx-3 text-center">
-                        <a class="nav-link text-light" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item mx-3 text-center">
-                        <a class="nav-link rounded text-light badge-info px-2" href="/signUp">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <section class="mt-5">
+                </div>
+            </template>
+            <ul class="navbar-nav w-100" id="categoryContainer">
+                <li class="nav-item mx-3 text-center">
+                    <a class="nav-link text-light" href="/login">Login</a>
+                </li>
+                <li class="nav-item mx-3 text-center">
+                    <a class="nav-link rounded text-light badge-info px-2" href="/signUp">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<section class="mt-5">
 
-    </section>
-    <footer>
+</section>
+<footer>
 
-    </footer>
-    <script src="js/profile.js"></script>
+</footer>
+<script src="js/profile.js"></script>
 </body>
 
 </html>

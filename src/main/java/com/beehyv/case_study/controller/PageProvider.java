@@ -33,5 +33,12 @@ public class PageProvider {
     }
 
     @GetMapping("/getProfile")
-    String getProfilePage(){return "profile.html";}
+    String getProfilePage() {
+        return "profile.html";
+    }
+
+    @GetMapping("/search")
+    String getSearchPage() {
+        return "searchPage.html";
+    }
 }

@@ -16,9 +16,9 @@ const getUserName = function () {
         localStorage.setItem("user", JSON.stringify(user));
         welcomeUser(user.name);
     }
-    if(localStorage.getItem("cats")===null){
+    if (localStorage.getItem("cats") === null) {
         doRequest("GET", "/products/getAllCategories", readCategories);
-    }else{
+    } else {
         const cats = JSON.parse(localStorage.getItem("cats"));
         addToCategoryList(cats);
     }
@@ -27,7 +27,7 @@ let cats;
 const readCategories = function () {
     if (this.status === 200) {
         cats = JSON.parse(this.response);
-        localStorage.setItem("cats",JSON.stringify(cats));
+        localStorage.setItem("cats", JSON.stringify(cats));
         addToCategoryList(cats);
     }
 };
@@ -40,15 +40,15 @@ function addToCategoryList(cats) {
         catContainer.insertChildAtIndex(copy, 0);
     }
 }
-console.log(localStorage.getItem("user"));
+
 if (localStorage.getItem("user") === null) {
     doRequest("GET", "/loggedInUserName", getUserName);
 } else {
     const user = JSON.parse(localStorage.getItem("user"));
     welcomeUser(user.name);
-    if(localStorage.getItem("cats")===null){
+    if (localStorage.getItem("cats") === null) {
         doRequest("GET", "/products/getAllCategories", readCategories);
-    }else{
+    } else {
         const cats = JSON.parse(localStorage.getItem("cats"));
         addToCategoryList(cats);
     }
