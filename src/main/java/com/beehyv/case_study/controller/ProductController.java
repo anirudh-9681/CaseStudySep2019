@@ -18,6 +18,11 @@ public class ProductController {
     @Autowired
     ProductManager productManager;
 
+    @GetMapping("")
+    public ResponseEntity getAllProducts() {
+        return ResponseEntity.ok().body(productManager.getAllProducts());
+    }
+
     @PostMapping("/addProduct")
     public ResponseEntity addProduct(@RequestBody String json) {
         try {

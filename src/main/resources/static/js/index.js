@@ -1,6 +1,8 @@
 const catContainer = document.getElementById("categoryContainer");
 const catTemplate = document.getElementById("categoryTemplate");
 const welcomeTemplate = document.getElementById("welcomeTemplate");
+const productTemplate = document.getElementById("productTemplate");
+const bestSellersContainer = document.getElementById("bestSellers");
 let user;
 const welcomeUser = function (userName) {
     while (catContainer.firstChild) {
@@ -10,7 +12,8 @@ const welcomeUser = function (userName) {
     copy.children[0].children[0].innerText = `Welcome, ${userName}`;
     catContainer.insertChildAtIndex(copy, catContainer.length);
 };
-const getUserName = function () {
+const getUser = function () {
+    console.log(this);
     if (this.status === 200) {
         user = JSON.parse(this.response);
         localStorage.setItem("user", JSON.stringify(user));
@@ -42,7 +45,8 @@ function addToCategoryList(cats) {
 }
 
 if (localStorage.getItem("user") === null) {
-    doRequest("GET", "/loggedInUserName", getUserName);
+    console.log("null user")
+    doRequest("GET", "/loggedInUser", getUser);
 } else {
     const user = JSON.parse(localStorage.getItem("user"));
     welcomeUser(user.name);
@@ -53,3 +57,23 @@ if (localStorage.getItem("user") === null) {
         addToCategoryList(cats);
     }
 }
+
+const bestSellersUpdate = function () {
+    if (this.status === 200) {
+        const products = JSON.parse(this.response);
+        addToBestSellers(products);
+    }
+};
+
+function addToBestSellers(products) {
+    for (const product of products) {
+        const copy = productTemplate.cloneNode(true).content;
+        copy.children[0].children[0].href = `${location.host}/getProduct/${product.productId}`;
+        copy.children[0].children[0].children[1].innerText = product.name;
+        copy.children[0].children[0].children[2].innerText = `Rs. ${product.price}`;
+        copy.children[0].children[0].children[3].innerText = product.details;
+        bestSellersContainer.appendChild(copy);
+    }
+}
+
+doRequest("GET", "/products", bestSellersUpdate);

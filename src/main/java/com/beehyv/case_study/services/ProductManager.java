@@ -109,4 +109,11 @@ public class ProductManager {
         }
         return categories;
     }
+
+    public List<ProductDTO> getAllProducts() {
+        return productRepo.findAll()
+                .stream()
+                .map(product -> product.getDTO())
+                .collect(Collectors.toList());
+    }
 }

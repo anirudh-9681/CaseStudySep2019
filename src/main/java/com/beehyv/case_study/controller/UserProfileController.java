@@ -16,7 +16,7 @@ public class UserProfileController {
     @Autowired
     UserManager userManager;
 
-    @GetMapping("/loggedInUserName")
+    @GetMapping("/loggedInUser")
     ResponseEntity checkIfLoggedIn() {
         try {
             UserProfileDTO userProfileDTO = userManager.getUserById(userManager.getLoggedInUserId()).getDTO();

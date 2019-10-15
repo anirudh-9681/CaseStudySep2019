@@ -32,7 +32,7 @@ public class UserManager {
     PasswordEncoder passwordEncoder;
 
     public boolean isAuthorized(long userId) {
-        return isAdmin() || userId == getLoggedInUserId();
+        return userId == getLoggedInUserId();
     }
 
     public boolean isAdmin() {

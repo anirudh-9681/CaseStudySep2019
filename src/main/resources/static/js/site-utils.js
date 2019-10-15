@@ -25,7 +25,10 @@ function doRequest(method, url, callback, body, form) {
 function search(event) {
     event.preventDefault();
     if (!location.pathname.startsWith("/search")) {
-        const str = document.getElementById("searchBar").value;
+        const str = document.getElementById("searchBar").value.trim();
+        if (str === "") {
+            return;
+        }
         location.pathname = `/search?searchString=${str.replace(/ /g, "+")}`;
     }
 }
