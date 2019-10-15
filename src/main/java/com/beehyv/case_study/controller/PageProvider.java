@@ -23,13 +23,15 @@ public class PageProvider {
     }
 
     @GetMapping("/login")
-    String getFailedPage() {
+    String getLoginPage() {
         return "loginPage.html";
     }
 
     @GetMapping("/signUp")
-    String getSignUp() {
+    String getSignUpPage() {
         return "signUpPage.html";
     }
 
+    @GetMapping("/getProfile")
+    String getProfilePage(){return "profile.html";}
 }
