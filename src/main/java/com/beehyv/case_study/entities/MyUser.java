@@ -94,7 +94,7 @@ public class MyUser {
     public void setDTO(UserProfileDTO userProfileDTO) {
 //        userId = userProfileDTO.getUserId(); // never change userId even though in this case, replacing with same value
         if (Objects.nonNull(userProfileDTO.getName())) name = userProfileDTO.getName();
-        if (Objects.nonNull(userProfileDTO.getEmail())) email = userProfileDTO.getEmail();
+//        if (Objects.nonNull(userProfileDTO.getEmail())) email = userProfileDTO.getEmail(); //never change email id as it is used for credentials
         if (Objects.nonNull(userProfileDTO.getPhone())) phone = userProfileDTO.getPhone();
         if (Objects.nonNull(userProfileDTO.getAddress())) address = userProfileDTO.getAddress();
     }
