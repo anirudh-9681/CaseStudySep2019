@@ -30,7 +30,7 @@ function addToCategoryList(cats) {
 
 if (localStorage.getItem("user") === null) {
     // FIXME(Shift): Uncomment this on server live
-    location.href = `http://${location.host}/login`
+    location.href = `http://${location.host}/login`;
 } else {
     const user = JSON.parse(localStorage.getItem("user"));
     welcomeUser(user.name);
