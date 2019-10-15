@@ -1,7 +1,7 @@
 const catContainer = document.getElementById("categoryContainer");
 const catTemplate = document.getElementById("categoryTemplate");
 const welcomeTemplate = document.getElementById("welcomeTemplate");
-let userName;
+let user;
 const welcomeUser = function (userName) {
     while (catContainer.firstChild) {
         catContainer.removeChild(catContainer.firstChild);
@@ -12,9 +12,10 @@ const welcomeUser = function (userName) {
 };
 const getUserName = function () {
     if (this.status === 200) {
-        userName = JSON.parse(this.response);
-        welcomeUser(userName);
+        user = JSON.parse(this.response);
+        welcomeUser(user.name);
     }
+    doRequest("GET", "/products/getAllCategories", readCategories);
 };
 doRequest("GET", "/loggedInUserName", getUserName);
 
@@ -35,4 +36,3 @@ function addToCategoryList(cat) {
     catContainer.insertChildAtIndex(copy, 0);
 }
 
-doRequest("GET", "/products/getAllCategories", readCategories);

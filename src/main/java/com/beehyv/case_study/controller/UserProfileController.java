@@ -19,8 +19,8 @@ public class UserProfileController {
     @GetMapping("/loggedInUserName")
     ResponseEntity checkIfLoggedIn() {
         try {
-            String name = userManager.getUserById(userManager.getLoggedInUserId()).getName();
-            return ResponseEntity.ok().body(name);
+            UserProfileDTO userProfileDTO = userManager.getUserById(userManager.getLoggedInUserId()).getDTO();
+            return ResponseEntity.ok().body(userProfileDTO);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
