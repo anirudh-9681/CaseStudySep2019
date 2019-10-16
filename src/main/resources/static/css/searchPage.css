@@ -1,0 +1,13 @@
+body{
+    height: 100vh;
+}
+.dropdown-divider{
+    border-color: #b9b9b9;
+}
+.price-range{
+    height: 100%;
+    width: 35%;
+}
+.product-card:hover{
+    text-decoration: underline;
+}

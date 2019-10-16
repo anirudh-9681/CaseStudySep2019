@@ -34,7 +34,6 @@ const formSubmit = function (event) {
     xhr.send(data);
 };
 const responseProcessor = function () {
-    console.log(this);
     if (this.status === 200) {
         localStorage.removeItem("user");
         location.href = `http://${location.host}/`;

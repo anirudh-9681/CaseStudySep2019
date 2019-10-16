@@ -13,7 +13,6 @@ function doRequest(method, url, callback, body, form) {
     xhr.open(method, newUrl, true);
     if (form) {
         xhr.withCredentials = true;
-        console.log("a form is sent");
     } else {
         xhr.setRequestHeader("Content-Type", "application/json");
     }
@@ -33,5 +32,7 @@ function search(event) {
         url.pathname = "search";
         url.searchParams.set("searchString",str);
         location.assign(url.href);
+    }else{
+        doSearch();
     }
 }

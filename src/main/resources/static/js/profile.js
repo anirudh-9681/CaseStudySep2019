@@ -76,7 +76,6 @@ function updateProfile(event) {
 }
 
 const checkUpdate = function () {
-    console.log(this);
     if (this.status === 200) {
         location.reload();
     }

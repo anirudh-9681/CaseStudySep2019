@@ -13,7 +13,7 @@ const welcomeUser = function (userName) {
 
 const readCategories = function () {
     if (this.status === 200) {
-        cats = JSON.parse(this.response);
+        const cats = JSON.parse(this.response);
         localStorage.setItem("cats", JSON.stringify(cats));
         addToCategoryList(cats);
     }
