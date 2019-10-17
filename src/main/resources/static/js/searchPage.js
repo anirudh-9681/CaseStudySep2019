@@ -5,11 +5,6 @@ let searchString = url.searchParams.get("searchString");
 let category = url.searchParams.get("category");
 let products_list;
 
-function applyCategory() {
-    const url = new URL(location);
-
-}
-
 function applyFilter() {
 
     const filters = {};
@@ -49,7 +44,7 @@ function applyFilter() {
     if (filters.subcategory){
         filters.subcategory = filters.subcategory.slice(0,filters.subcategory.length-1);
     }
-
+    console.log(filters);
     doRequest("POST",`/products/${category}/getFilteredProducts`,searchProcessor,filters);
 }
 
@@ -79,6 +74,7 @@ const searchProcessor = function(){
     if(this.status === 200){
         products_list = JSON.parse(this.response);
         fillProducts(products_list);
+        //FIXME add a fill subcategory list method
     }
 };
 

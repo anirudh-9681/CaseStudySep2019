@@ -44,7 +44,7 @@ public class FilterSpecification implements Specification<Product> {
         }
 
         //checks if request has category property and adds a predicate
-        if (map.containsKey("category")) {
+        if (map.containsKey("category") && !map.get("category").equalsIgnoreCase("all")) {
             predicates.add(criteriaBuilder.equal(root.get("category"), map.get("category")));
         }
 

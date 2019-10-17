@@ -1,9 +1,37 @@
 [
   {
-    "name": "xyz",
-    "price": 394,
-    "details": "A test product that's useful for testing",
-    "category": "Test",
-    "subcategory": "[bikes , mobiles]"
+    "name": "Batman Costume",
+    "price": 3400,
+    "details": "Batman Costume from the dark knight",
+    "category": "Comic",
+    "subcategory": "[hero , dark]"
+  },
+  {
+    "name": "IronMan Costume Mk 4 ",
+    "price": 7000,
+    "details": "Friday included!",
+    "category": "Comic",
+    "subcategory": "[hero]"
+  },
+  {
+    "name": "Joker Costume",
+    "price": 3400,
+    "details": "Joker Costume inspired by the new Joker Movie",
+    "category": "Comic",
+    "subcategory": "[villain , dark]"
+  },
+  {
+    "name": "Skeletor Costume",
+    "price": 500,
+    "details": "*Bones Cackling*",
+    "category": "Cartoon",
+    "subcategory": "[villain , funny]"
+  },
+  {
+    "name": "Dog Costume",
+    "price": 500,
+    "details": "Big Boof!",
+    "category": "Animal",
+    "subcategory": "[cute]"
   }
 ]
