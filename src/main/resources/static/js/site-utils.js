@@ -22,7 +22,6 @@ function doRequest(method, url, callback, body, form) {
 }
 
 
-
 function search(event) {
     event.preventDefault();
     if (!location.pathname.startsWith("/search")) {
@@ -32,10 +31,10 @@ function search(event) {
         }
         let url = new URL(document.location);
         url.pathname = "search";
-        url.searchParams.set("searchString",str);
-        url.searchParams.set("category","all");
+        url.searchParams.set("searchString", str);
+        url.searchParams.set("category", "all");
         location.assign(url.href);
-    }else{
+    } else {
         applyCategory();
     }
 }

@@ -2,7 +2,9 @@ package com.beehyv.case_study.controller;
 
 import com.beehyv.case_study.entities.Order;
 import com.beehyv.case_study.services.OrderManager;
+import com.beehyv.case_study.utilities.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,8 @@ public class OrderController {
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.badRequest().build();
     }
@@ -37,7 +41,8 @@ public class OrderController {
     @GetMapping("/{userId}/createOrder")
     public ResponseEntity createOrder(@PathVariable String userId) {
         try {
-            Order order = orderManager.createOrder(
+            Order order;
+            order = orderManager.createOrder(
                     Long.parseLong(userId)
             );
             if (Objects.nonNull(order)) {
@@ -45,6 +50,8 @@ public class OrderController {
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.badRequest().build();
     }

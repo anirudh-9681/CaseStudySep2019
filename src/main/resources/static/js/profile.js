@@ -94,13 +94,15 @@ const pageData = function () {
         } else {
             userAddress.innerHTML = "Not Provided";
         }
+    } else if (this.status === 401) {
+        location.pathname = "/login";
     }
 };
 
 if (localStorage.getItem("user") === null) {
     // FIXME(Shift): Uncomment this on server live
-    location.href = `http://${location.host}/login`;
+    location.pathname = "/login";
 } else {
     const user = JSON.parse(localStorage.getItem("user"));
-    doRequest("GET", `/getProfile/${user.userId}`, pageData);
+    doRequest("GET", `/getProfile/${user["userId"]}`, pageData);
 }

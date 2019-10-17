@@ -57,7 +57,7 @@ if (localStorage.getItem("user") === null) {
 }
 
 const checkLogout = function () {
-    if(this.status==200){
+    if (this.status == 200) {
         localStorage.removeItem("user");
         location.pathname = "/";
     }
@@ -65,5 +65,5 @@ const checkLogout = function () {
 
 function doLogout(event) {
     event.preventDefault();
-    doRequest("GET","/logout",checkLogout)
+    doRequest("GET", "/logout", checkLogout)
 }

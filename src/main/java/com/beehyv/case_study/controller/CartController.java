@@ -6,7 +6,9 @@ import com.beehyv.case_study.entities.Cart;
 import com.beehyv.case_study.entities.CartItem;
 import com.beehyv.case_study.services.CartManager;
 import com.beehyv.case_study.utilities.ObjectMapperImpl;
+import com.beehyv.case_study.utilities.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,8 @@ public class CartController {
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.badRequest().build();
     }
@@ -44,6 +48,8 @@ public class CartController {
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.badRequest().build();
     }
@@ -59,6 +65,8 @@ public class CartController {
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
+        } catch (UnauthorizedException e) {
+            ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.badRequest().build();
     }
@@ -77,6 +85,8 @@ public class CartController {
 
         } catch (NumberFormatException e) {
             e.printStackTrace();
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.badRequest().build();
 
@@ -107,6 +117,8 @@ public class CartController {
                         }
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
+                    } catch (UnauthorizedException e) {
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
                     }
                 } else if (Objects.nonNull(userId) && Objects.nonNull(productId)) {
                     try {
@@ -119,6 +131,8 @@ public class CartController {
                         }
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
+                    } catch (UnauthorizedException e) {
+                        ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
                     }
                 }
             }

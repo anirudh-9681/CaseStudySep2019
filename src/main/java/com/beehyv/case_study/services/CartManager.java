@@ -9,6 +9,7 @@ import com.beehyv.case_study.entities.Product;
 import com.beehyv.case_study.repositories.CartItemRepo;
 import com.beehyv.case_study.repositories.CartRepo;
 import com.beehyv.case_study.repositories.ProductRepo;
+import com.beehyv.case_study.utilities.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class CartManager {
         cartRepo.save(cart);
     }
 
-    public Cart getUserCart(long userId) {
+    public Cart getUserCart(long userId) throws UnauthorizedException {
         if (!userManager.isAuthorized(userId)) {
             return null;
         }
@@ -39,7 +40,7 @@ public class CartManager {
         return userManager.getUserById(userId).getCart();
     }
 
-    public CartItem getCartItem(long userId, long cartItemId) {
+    public CartItem getCartItem(long userId, long cartItemId) throws UnauthorizedException {
         Cart cart = getUserCart(userId);
         if (Objects.nonNull(cart)) {
             for (CartItem cartItem : cart.getProducts()) {
@@ -51,7 +52,7 @@ public class CartManager {
         return null;
     }
 
-    public CartItem addProductToCart(long userId, long productId) {
+    public CartItem addProductToCart(long userId, long productId) throws UnauthorizedException {
         if (!userManager.isAuthorized(userId)) {
             return null;
         }
@@ -81,7 +82,7 @@ public class CartManager {
         return cartItem;
     }
 
-    public ProductDTO removeProductFromCart(long userId, long productId) {
+    public ProductDTO removeProductFromCart(long userId, long productId) throws UnauthorizedException {
         if (!userManager.isAuthorized(userId)) {
             return null;
         }
@@ -108,7 +109,7 @@ public class CartManager {
         return null;
     }
 
-    public CartItem changeCartItemQuantity(long cartItemId, QuantityDTO quantityDTO) {
+    public CartItem changeCartItemQuantity(long cartItemId, QuantityDTO quantityDTO) throws UnauthorizedException {
         if (userManager.isAdmin()) {
             CartItem cartItem = cartItemRepo.findByCartItemId(cartItemId);
             cartItem.setQuantity(quantityDTO.getQuantity());
@@ -135,7 +136,7 @@ public class CartManager {
         return null;
     }
 
-    public CartItem changeCartItemQuantity(long userId, long productId, QuantityDTO quantityDTO) {
+    public CartItem changeCartItemQuantity(long userId, long productId, QuantityDTO quantityDTO) throws UnauthorizedException {
         if (userManager.isAuthorized(userId)) {
             Cart cart = getUserCart(userId);
             for (CartItem cartItem : cart.getProducts()) {

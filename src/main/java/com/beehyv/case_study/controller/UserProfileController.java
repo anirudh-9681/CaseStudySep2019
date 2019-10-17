@@ -4,7 +4,9 @@ import com.beehyv.case_study.dto.ResultDTO;
 import com.beehyv.case_study.dto.UserProfileDTO;
 import com.beehyv.case_study.services.UserManager;
 import com.beehyv.case_study.utilities.ObjectMapperImpl;
+import com.beehyv.case_study.utilities.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +30,12 @@ public class UserProfileController {
 
     @GetMapping("/getProfile/{userId}")
     ResponseEntity getUserProfile(@PathVariable String userId) {
-        UserProfileDTO userProfileDTO = userManager.getUserProfileById(Long.parseLong(userId));
+        UserProfileDTO userProfileDTO = null;
+        try {
+            userProfileDTO = userManager.getUserProfileById(Long.parseLong(userId));
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         if (userProfileDTO != null) {
             return ResponseEntity.ok().body(userProfileDTO);
         }
@@ -44,6 +51,8 @@ public class UserProfileController {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         return ResponseEntity.badRequest().body(new ResultDTO("failure"));
     }

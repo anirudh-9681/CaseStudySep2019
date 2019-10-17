@@ -19,125 +19,127 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand font-weight-bold" id="siteName" href="/">
-                <img class="rounded mx-3" src="images/logo.ico" alt="A logo" width="50">
-                SHOP
-            </a>
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand font-weight-bold" id="siteName" href="/">
+            <img class="rounded mx-3" src="images/logo.ico" alt="A logo" width="50">
+            SHOP
+        </a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="container-fluid d-flex flex-column flex-md-row">
-                <form class="form-inline col col-md-8 col-lg-6 ml-md-auto mr-md-1">
-                    <div id="searchContainer" class="md-form mx-1 my-2 px-0 my-md-0 col">
-                        <input id="searchBar" class="form-control" type="text" placeholder="Search" aria-label="Search">
-                        <button id="searchButton" class="btn btn-secondary" onclick="search(event)">
-                            <i class="material-icons">
-                                search
-                            </i>
-                        </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container-fluid d-flex flex-column flex-md-row">
+            <form class="form-inline col col-md-8 col-lg-6 ml-md-auto mr-md-1">
+                <div id="searchContainer" class="md-form mx-1 my-2 px-0 my-md-0 col">
+                    <input id="searchBar" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <button id="searchButton" class="btn btn-secondary" onclick="search(event)">
+                        <i class="material-icons">
+                            search
+                        </i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 py-md-1">
+        <div class="collapse navbar-collapse mr-0 mb-3 mb-md-0" id="navbarSupportedContent">
+            <template id="categoryTemplate">
+                <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category</a>
+                </li>
+            </template>
+            <template id="welcomeTemplate">
+                <div class="dropdown">
+                    <button type="button" class="btn mx-md-auto btn-dark dropdown-toggle" data-toggle="dropdown">
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/getProfile">Account Settings</a>
+                        <a class="dropdown-item" href="#">Cart</a>
+                        <a class="dropdown-item" href="#">Orders</a>
+                        <a class="dropdown-item" onclick="doLogout(event)">Log Out</a>
                     </div>
-                </form>
-            </div>
-        </nav>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 py-md-1">
-            <div class="collapse navbar-collapse mr-0 mb-3 mb-md-0" id="navbarSupportedContent">
-                <template id="categoryTemplate">
-                    <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category</a>
-                    </li>
-                </template>
-                <template id="welcomeTemplate">
-                    <div class="dropdown">
-                        <button type="button" class="btn mx-md-auto btn-dark dropdown-toggle" data-toggle="dropdown">
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/getProfile">Account Settings</a>
-                            <a class="dropdown-item" href="#">Cart</a>
-                            <a class="dropdown-item" href="#">Orders</a>
-                            <a class="dropdown-item" onclick="doLogout(event)">Log Out</a>
-                        </div>
-                    </div>
-                </template>
-                <ul class="navbar-nav w-100" id="categoryContainer">
-                    <li class="nav-item mx-3 text-center">
-                        <a class="nav-link text-light" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item mx-3 text-center">
-                        <a class="nav-link rounded text-light badge-info px-2" href="/signUp">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <section class="mt-5 h-100">
-        <div class="container-fluid h-100">
-            <div class="row">
-                <div class="col col-md-2 border-right border-dark h-100">
-                    <h4 class="text-secondary">
-                        Refine By
-                    </h4>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="text-muted"><small>Category</small></h6>
-                    <div class="row mx-0">
-                        <small id="catFilterTemplate">
-                            <input class="shadow-none" type="radio" checked name="category" value="all"
-                                   onclick="applyCategory()"><span class="ml-2">All</span><br>
-                        </small>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="text-muted"><small>Price</small></h6>
-                    <div class="row mx-0">
-                        <small>
-                            <input class="mr-auto price-range" type="number" min="0" step="500" name="minPrice"
-                                id="minPrice" placeholder="Min">
-                            <input class="mr-auto price-range" type="number" min="0" step="500" name="maxPrice"
-                                id="maxPrice" placeholder="Max">
-                            <button class="btn pt-0 pb-1 btn-success shadow-none"
+                </div>
+            </template>
+            <ul class="navbar-nav w-100" id="categoryContainer">
+                <li class="nav-item mx-3 text-center">
+                    <a class="nav-link text-light" href="/login">Login</a>
+                </li>
+                <li class="nav-item mx-3 text-center">
+                    <a class="nav-link rounded text-light badge-info px-2" href="/signUp">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<section class="mt-5 h-100">
+    <div class="container-fluid h-100">
+        <div class="row">
+            <div class="col col-md-2 border-right border-dark h-100">
+                <h4 class="text-secondary">
+                    Refine By
+                </h4>
+                <div class="dropdown-divider"></div>
+                <h6 class="text-muted"><small>Category</small></h6>
+                <div class="row mx-0">
+                    <small id="catFilterTemplate">
+                        <input class="shadow-none" type="radio" checked name="category" value="all"
+                               onclick="applyCategory()"><span class="ml-2">All</span><br>
+                    </small>
+                </div>
+                <div class="dropdown-divider"></div>
+                <h6 class="text-muted"><small>Price</small></h6>
+                <div class="row mx-0">
+                    <small>
+                        <input class="mr-auto price-range" type="number" min="0" step="500" name="minPrice"
+                               id="minPrice" placeholder="Min">
+                        <input class="mr-auto price-range" type="number" min="0" step="500" name="maxPrice"
+                               id="maxPrice" placeholder="Max">
+                        <button class="btn pt-0 pb-1 btn-success shadow-none"
                                 onclick="applyFilter()"><small>Go</small></button>
-                        </small>
-                    </div>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="text-muted"><small>Subcategory</small></h6>
-                    <div class="row mx-0">
-                        <template id="subCatTemplate">
-                            <input class="shadow-none" type="checkbox" name="subcategory" value="bike"
-                                   onclick="applyFilter()"><span class="ml-2">Bikes</span><br>
-                        </template>
-                        <small id="subCatContainer">
-                        </small>
-                    </div>
-                    <div class="dropdown-divider d-block d-md-none"></div>
+                    </small>
                 </div>
-                <div id="productContainer" class="col col-md-8">
-                    <template id="productCard">
-                        <div class="row flex-column flex-md-row product-card">
-                            <div class="col col-md-3">
-                                <img src="images/notfound.jpg" alt="Product Image">
-                            </div>
-                            <div class="col col-md-7">
-                                <h4>Product Name</h4>
-                                <p class="text-muted">Price</p>
-                                <p class="text-truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                                    tenetur reprehenderit
-                                    expedita cum veritatis, distinctio ea iure neque sapiente eligendi rerum dolor fuga,
-                                    incidunt optio repellat maiores natus mollitia accusantium!</p>
-                            </div>
-                            <div class="col"><button type="button" class="btn btn-success">Add To Cart</button></div>
-                        </div>
+                <div class="dropdown-divider"></div>
+                <h6 class="text-muted"><small>Subcategory</small></h6>
+                <div class="row mx-0">
+                    <template id="subCatTemplate">
+                        <input class="shadow-none" type="checkbox" name="subcategory" value="bike"
+                               onclick="applyFilter()"><span class="ml-2">Bikes</span><br>
                     </template>
+                    <small id="subCatContainer">
+                    </small>
                 </div>
+                <div class="dropdown-divider d-block d-md-none"></div>
+            </div>
+            <div id="productContainer" class="col col-md-8">
+                <template id="productCard">
+                    <div class="row flex-column flex-md-row product-card">
+                        <div class="col col-md-3">
+                            <img src="images/notfound.jpg" alt="Product Image">
+                        </div>
+                        <div class="col col-md-7">
+                            <h4>Product Name</h4>
+                            <p class="text-muted">Price</p>
+                            <p class="text-truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
+                                tenetur reprehenderit
+                                expedita cum veritatis, distinctio ea iure neque sapiente eligendi rerum dolor fuga,
+                                incidunt optio repellat maiores natus mollitia accusantium!</p>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-success">Add To Cart</button>
+                        </div>
+                    </div>
+                </template>
             </div>
         </div>
+    </div>
 
-    </section>
-    <footer>
+</section>
+<footer>
 
-    </footer>
-    <script src="js/header.js"></script>
-    <script src="js/searchPage.js"></script>
+</footer>
+<script src="js/header.js"></script>
+<script src="js/searchPage.js"></script>
 </body>
 
 </html>

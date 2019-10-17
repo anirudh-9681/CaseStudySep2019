@@ -7,6 +7,7 @@ import com.beehyv.case_study.entities.OrderStatus;
 import com.beehyv.case_study.repositories.CartItemRepo;
 import com.beehyv.case_study.repositories.OrderItemRepo;
 import com.beehyv.case_study.repositories.OrderRepo;
+import com.beehyv.case_study.utilities.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class OrderManager {
     @Autowired
     CartItemRepo cartItemRepo;
 
-    public List<Order> getUserOrders(long userId) {
+    public List<Order> getUserOrders(long userId) throws UnauthorizedException {
         if (userManager.isAuthorized(userId)) {
             MyUser myUser = userManager.getUserById(userId);
             List<Order> orders = myUser.getOrders();
@@ -33,7 +34,7 @@ public class OrderManager {
         return null;
     }
 
-    public Order createOrder(long userId) {
+    public Order createOrder(long userId) throws UnauthorizedException {
         if (!userManager.isAuthorized(userId)) {
             return null;
         }

@@ -9,6 +9,7 @@ import com.beehyv.case_study.repositories.CartRepo;
 import com.beehyv.case_study.repositories.MyUserCredentialsRepo;
 import com.beehyv.case_study.repositories.MyUserRepo;
 import com.beehyv.case_study.security.MyUserDetails;
+import com.beehyv.case_study.utilities.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,18 +32,24 @@ public class UserManager {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public boolean isAuthorized(long userId) {
+    public boolean isAuthorized(long userId) throws UnauthorizedException {
+
         return userId == getLoggedInUserId();
+
     }
 
-    public boolean isAdmin() {
+    public boolean isAdmin() throws UnauthorizedException {
         // Can also return getLoggedInUserId() == 1; Since ADMIN is the first created user in database.
-        return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-                .getAuthorities()
-                .stream()
-                .filter(o -> ((GrantedAuthority) o).getAuthority().equalsIgnoreCase("ADMIN"))
-                .collect(Collectors.toList())
-                .size() == 1;
+        try {
+            return ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+                    .getAuthorities()
+                    .stream()
+                    .filter(o -> ((GrantedAuthority) o).getAuthority().equalsIgnoreCase("ADMIN"))
+                    .collect(Collectors.toList())
+                    .size() == 1;
+        } catch (ClassCastException e) {
+            throw new UnauthorizedException("User not logged in");
+        }
     }
 
     public boolean existsById(long userId) {
@@ -73,15 +80,20 @@ public class UserManager {
         return tmp.getUserId();
     }
 
-    public long getLoggedInUserId() {
-        return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMyUserCredentials().getUserId();
+    public long getLoggedInUserId() throws UnauthorizedException {
+
+        try {
+            return ((MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getMyUserCredentials().getUserId();
+        } catch (ClassCastException e) {
+            throw new UnauthorizedException("User not logged in");
+        }
     }
 
     public MyUser getUserById(long userId) {
         return myUserRepo.getByUserId(userId);
     }
 
-    public boolean updateUser(UserProfileDTO userProfileDTO) {
+    public boolean updateUser(UserProfileDTO userProfileDTO) throws UnauthorizedException {
         if (!isAuthorized(userProfileDTO.getUserId())) {
             return false;
         }
@@ -95,7 +107,7 @@ public class UserManager {
         myUserRepo.save(myUser);
     }
 
-    public UserProfileDTO getUserProfileById(long userId) {
+    public UserProfileDTO getUserProfileById(long userId) throws UnauthorizedException {
         if (isAuthorized(userId) && myUserRepo.existsByUserId(userId)) {
             return getUserById(userId).getDTO();
         }
