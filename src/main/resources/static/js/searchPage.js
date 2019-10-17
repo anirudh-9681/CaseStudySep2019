@@ -99,7 +99,7 @@ const checkAddToCart = function () {
 
 function addToCart(id) {
     const user = JSON.parse(localStorage.getItem("user"));
-    doRequest("GET", `/cart/${user.userId}/add/${id}`, checkAddToCart);
+    doRequest("GET", `/cart/${user["userId"]}/add/${id}`, checkAddToCart);
 }
 
 const searchProcessor = function () {
