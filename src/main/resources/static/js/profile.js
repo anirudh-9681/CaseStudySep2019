@@ -100,7 +100,6 @@ const pageData = function () {
 };
 
 if (localStorage.getItem("user") === null) {
-    // FIXME(Shift): Uncomment this on server live
     location.pathname = "/login";
 } else {
     const user = JSON.parse(localStorage.getItem("user"));
