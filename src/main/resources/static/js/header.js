@@ -55,3 +55,15 @@ if (localStorage.getItem("user") === null) {
         addToCategoryList(cats);
     }
 }
+
+const checkLogout = function () {
+    if(this.status==200){
+        localStorage.removeItem("user");
+        location.pathname = "/";
+    }
+};
+
+function doLogout(event) {
+    event.preventDefault();
+    doRequest("GET","/logout",checkLogout)
+}

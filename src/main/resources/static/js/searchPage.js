@@ -42,9 +42,8 @@ function applyFilter() {
         }
     }
     if (filters.subcategory){
-        filters.subcategory = filters.subcategory.slice(0,filters.subcategory.length-1);
+        filters.subcategory = filters.subcategory.slice(1,filters.subcategory.length-1);
     }
-    console.log(filters);
     doRequest("POST",`/products/${category}/getFilteredProducts`,searchProcessor,filters);
 }
 
@@ -55,25 +54,57 @@ function fillProducts(products_list){
 
     for (const product of products_list) {
         const copy = productCard.cloneNode(true).content;
-        copy.children[0].setAttribute("onclick",`redirect(${product["productId"]})`);
         copy.children[0].children[1].children[0].innerText = product["name"];
         copy.children[0].children[1].children[1].innerText = product["price"];
         copy.children[0].children[1].children[2].innerText = product["details"];
+        copy.children[0].children[2].children[0].setAttribute("onclick",`addToCart(${product["productId"]})`);
+        copy.children[0].children[2].children[0].setAttribute("id",`product${product["productId"]}`);
         productContainer.appendChild(copy);
     }
 }
 
-function redirect(id) {
-    const url = new URL(location);
-    url.pathname = `products/productPage`;
-    url.searchParams.set("productId",id);
-    location.href = url.href;
+function fillSubcategories(products_list){
+    let subCats = [];
+    for(const product of products_list){
+        let subs = product["subcategory"];
+        subs = subs.slice(1,subs.length -1);
+        for (const sub of subs.split(",")){
+            subCats.push(sub.trim());
+        }
+    }
+    const subCatSet = [...new Set(subCats)];
+    const subCatTemplate = document.getElementById("subCatTemplate");
+    const subCatContainer = document.getElementById("subCatContainer");
+    while (subCatContainer.firstChild){
+        subCatContainer.removeChild(subCatContainer.firstChild);
+    }
+    for (const subCat of subCatSet){
+        const copy = subCatTemplate.cloneNode(true).content;
+        copy.children[0].value = subCat;
+        copy.children[1].innerText = subCat;
+        subCatContainer.appendChild(copy);
+    }
+}
+
+const checkAddToCart = function(){
+    if(this.status===200){
+        const response = JSON.parse(this.response);
+        const c = document.getElementById(`product${response.product["productId"]}`);
+        c.removeAttribute("onclick");
+        c.innerHTML = "Added To Cart!";
+    }
+};
+
+function addToCart(id) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    doRequest("GET",`/cart/${user.userId}/add/${id}`,checkAddToCart);
 }
 
 const searchProcessor = function(){
     if(this.status === 200){
         products_list = JSON.parse(this.response);
         fillProducts(products_list);
+        fillSubcategories(products_list);
         //FIXME add a fill subcategory list method
     }
 };

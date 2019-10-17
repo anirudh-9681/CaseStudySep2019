@@ -36,7 +36,6 @@ function search(event) {
         url.searchParams.set("category","all");
         location.assign(url.href);
     }else{
-        console.log("in else");
         applyCategory();
     }
 }

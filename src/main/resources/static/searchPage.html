@@ -57,7 +57,7 @@
                             <a class="dropdown-item" href="/getProfile">Account Settings</a>
                             <a class="dropdown-item" href="#">Cart</a>
                             <a class="dropdown-item" href="#">Orders</a>
-                            <a class="dropdown-item" href="/logout">Log Out</a>
+                            <a class="dropdown-item" onclick="doLogout(event)">Log Out</a>
                         </div>
                     </div>
                 </template>
@@ -102,11 +102,11 @@
                     <div class="dropdown-divider"></div>
                     <h6 class="text-muted"><small>Subcategory</small></h6>
                     <div class="row mx-0">
-                        <small>
+                        <template id="subCatTemplate">
                             <input class="shadow-none" type="checkbox" name="subcategory" value="bike"
-                                onclick="applyFilter()"><span class="ml-2">Bikes</span><br>
-                            <input class="shadow-none" type="checkbox" name="subcategory" value="mobile"
-                                onclick="applyFilter()"><span class="ml-2">Mobiles</span><br>
+                                   onclick="applyFilter()"><span class="ml-2">Bikes</span><br>
+                        </template>
+                        <small id="subCatContainer">
                         </small>
                     </div>
                     <div class="dropdown-divider d-block d-md-none"></div>
@@ -117,7 +117,7 @@
                             <div class="col col-md-3">
                                 <img src="images/notfound.jpg" alt="Product Image">
                             </div>
-                            <div class="col col-md-9">
+                            <div class="col col-md-7">
                                 <h4>Product Name</h4>
                                 <p class="text-muted">Price</p>
                                 <p class="text-truncate">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
@@ -125,6 +125,7 @@
                                     expedita cum veritatis, distinctio ea iure neque sapiente eligendi rerum dolor fuga,
                                     incidunt optio repellat maiores natus mollitia accusantium!</p>
                             </div>
+                            <div class="col"><button type="button" class="btn btn-success">Add To Cart</button></div>
                         </div>
                     </template>
                 </div>

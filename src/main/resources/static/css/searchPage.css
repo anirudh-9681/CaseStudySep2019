@@ -9,5 +9,5 @@ body{
     width: 35%;
 }
 .product-card:hover{
-    text-decoration: underline;
+    text-decoration: darkgrey;
 }

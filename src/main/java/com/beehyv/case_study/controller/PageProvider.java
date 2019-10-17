@@ -17,10 +17,6 @@ public class PageProvider {
         return "index.html";
     }
 
-    @GetMapping("/home")
-    String getHomePage() {
-        return "mainPage.html";
-    }
 
     @GetMapping("/login")
     String getLoginPage() {
@@ -40,10 +36,5 @@ public class PageProvider {
     @GetMapping("/search")
     String getSearchPage() {
         return "searchPage.html";
-    }
-
-    @GetMapping("/products/productPage")
-    String getProductPage(){
-        return "productPage.html";
     }
 }

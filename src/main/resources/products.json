@@ -1,37 +1,72 @@
 [
   {
-    "name": "Batman Costume",
+    "name": "Batman Costume Medium",
     "price": 3400,
     "details": "Batman Costume from the dark knight",
     "category": "Comic",
-    "subcategory": "[hero , dark]"
+    "subcategory": "[hero , dark, size-medium]"
   },
   {
-    "name": "IronMan Costume Mk 4 ",
+    "name": "IronMan Costume Mk 4 Medium",
     "price": 7000,
     "details": "Friday included!",
     "category": "Comic",
-    "subcategory": "[hero]"
+    "subcategory": "[hero, size-medium]"
   },
   {
-    "name": "Joker Costume",
+    "name": "Joker Costume Medium",
     "price": 3400,
     "details": "Joker Costume inspired by the new Joker Movie",
     "category": "Comic",
-    "subcategory": "[villain , dark]"
+    "subcategory": "[villain , dark, size-medium]"
   },
   {
-    "name": "Skeletor Costume",
+    "name": "Skeletor Costume Medium",
     "price": 500,
     "details": "*Bones Cackling*",
     "category": "Cartoon",
-    "subcategory": "[villain , funny]"
+    "subcategory": "[villain , funny, size-medium]"
   },
   {
-    "name": "Dog Costume",
+    "name": "Dog Costume Medium",
     "price": 500,
     "details": "Big Boof!",
     "category": "Animal",
-    "subcategory": "[cute]"
+    "subcategory": "[cute, size-medium]"
+  },
+  {
+    "name": "Batman Costume XLarge",
+    "price": 3400,
+    "details": "Batman Costume from the dark knight",
+    "category": "Comic",
+    "subcategory": "[hero , dark, size-xlarge]"
+  },
+  {
+    "name": "IronMan Costume Mk 4 XLarge",
+    "price": 7000,
+    "details": "Friday included!",
+    "category": "Comic",
+    "subcategory": "[hero, size-xlarge]"
+  },
+  {
+    "name": "Joker Costume XLarge",
+    "price": 3400,
+    "details": "Joker Costume inspired by the new Joker Movie",
+    "category": "Comic",
+    "subcategory": "[villain , dark, size-xlarge]"
+  },
+  {
+    "name": "Skeletor Costume XLarge",
+    "price": 500,
+    "details": "*Bones Cackling*",
+    "category": "Cartoon",
+    "subcategory": "[villain , funny, size-xlarge]"
+  },
+  {
+    "name": "Dog Costume XLarge",
+    "price": 500,
+    "details": "Big Boof!",
+    "category": "Animal",
+    "subcategory": "[cute, size-xlarge]"
   }
 ]
