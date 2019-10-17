@@ -107,7 +107,6 @@ const searchProcessor = function () {
         products_list = JSON.parse(this.response);
         fillProducts(products_list);
         fillSubcategories(products_list);
-        //FIXME add a fill subcategory list method
     }
 };
 

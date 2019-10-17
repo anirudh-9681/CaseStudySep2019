@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin").hasAuthority("ADMIN")
                 .antMatchers("/home", "/getProfile**", "/updateProfile").hasAnyAuthority("USER", "ADMIN")
-//                .antMatchers("/login").anonymous() //TODO how to make sure only logged out users can access login page?
+                .antMatchers("/login").anonymous() //TODO how to make sure only logged out users can access login page?
                 .antMatchers("/**").permitAll() // check /* and /**
                 .and()
                 .formLogin()

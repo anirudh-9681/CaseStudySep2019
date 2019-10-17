@@ -23,9 +23,13 @@ function addToCategoryList(cats) {
     for (const cat of cats) {
         const copy = catTemplate.cloneNode(true).content;
         copy.children[0].children[0].innerText = cat;
-        copy.children[0].children[0].href = `/products/${cat}`;
+        copy.children[0].children[0].href = `/search?category=${cat}`;
         catContainer.insertChildAtIndex(copy, 0);
     }
+    const copy = catTemplate.cloneNode(true).content;
+    copy.children[0].children[0].innerText = "All";
+    copy.children[0].children[0].href = `/search?category=All`;
+    catContainer.insertChildAtIndex(copy, 0);
 }
 
 const getUser = function () {
