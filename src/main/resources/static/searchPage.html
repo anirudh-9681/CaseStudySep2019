@@ -82,11 +82,9 @@
                     <div class="dropdown-divider"></div>
                     <h6 class="text-muted"><small>Category</small></h6>
                     <div class="row mx-0">
-                        <small>
-                            <input class="shadow-none" type="radio" name="category" value="Test"
-                                   onclick="applyFilter()"><span class="ml-2">Test</span><br>
-                            <input class="shadow-none" type="radio" name="category" value="Other"
-                                   onclick="applyFilter()"><span class="ml-2">Other</span><br>
+                        <small id="catFilterTemplate">
+                            <input class="shadow-none" type="radio" checked name="category" value="all"
+                                   onclick="applyCategory()"><span class="ml-2">All</span><br>
                         </small>
                     </div>
                     <div class="dropdown-divider"></div>

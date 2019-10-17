@@ -24,6 +24,13 @@ public class FilterSpecification implements Specification<Product> {
         //Holds a list of predicates to be used in conjunction
         List<Predicate> predicates = new ArrayList<>();
 
+        if (map.containsKey("name")){
+            String name = map.get("name").trim();
+            for (String s: name.split(" ")){
+                predicates.add(criteriaBuilder.like(root.get("name"),"%"+s.trim()+"%"));
+            }
+        }
+
         //checks if request has minPrice property and adds a predicate
         if (map.containsKey("minPrice")) {
             predicates.add(criteriaBuilder.ge(root.get("price"),

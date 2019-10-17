@@ -21,6 +21,8 @@ function doRequest(method, url, callback, body, form) {
     xhr.send(JSON.stringify(body));
 }
 
+
+
 function search(event) {
     event.preventDefault();
     if (!location.pathname.startsWith("/search")) {
@@ -31,8 +33,10 @@ function search(event) {
         let url = new URL(document.location);
         url.pathname = "search";
         url.searchParams.set("searchString",str);
+        url.searchParams.set("category","all");
         location.assign(url.href);
     }else{
-        doSearch();
+        console.log("in else");
+        applyCategory();
     }
 }

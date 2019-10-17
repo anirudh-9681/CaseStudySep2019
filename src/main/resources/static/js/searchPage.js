@@ -2,10 +2,21 @@ const productCard = document.getElementById("productCard");
 const productContainer = document.getElementById("productContainer");
 const url = new URL(location);
 let searchString = url.searchParams.get("searchString");
+let category = url.searchParams.get("category");
 let products_list;
+
+function applyCategory() {
+    const url = new URL(location);
+
+}
 
 function applyFilter() {
 
+    const filters = {};
+    const str = document.getElementById("searchBar").value.trim();
+    if (str){
+        filters.name = str;
+    }
     const radios = document.getElementsByName("category");
     let category;
     for(const radio of radios){
@@ -17,8 +28,6 @@ function applyFilter() {
     if (!category){
         return;
     }
-
-    const filters = {};
     const minPrice = document.getElementById("minPrice").value;
     const maxPrice = document.getElementById("maxPrice").value;
 
@@ -37,7 +46,10 @@ function applyFilter() {
             filters.subcategory += sub.value + ",";
         }
     }
-    filters.subcategory = filters.subcategory.slice(0,filters.subcategory.length-1);
+    if (filters.subcategory){
+        filters.subcategory = filters.subcategory.slice(0,filters.subcategory.length-1);
+    }
+
     doRequest("POST",`/products/${category}/getFilteredProducts`,searchProcessor,filters);
 }
 
@@ -74,8 +86,62 @@ function doSearch() {
     const str = document.getElementById("searchBar").value.trim();
     if(str){
         doRequest("GET",`/products/search/${str}`, searchProcessor);
+    }else{
+        if (category){
+            doRequest("GET",`/products/${category}`,searchProcessor);
+        }else{
+            doRequest("GET",`/products`,searchProcessor);
+        }
+
     }
 }
+
+function applyCategory() {
+    const str = document.getElementById("searchBar").value.trim();
+    const url = new URL(location);
+    if (str){
+        url.searchParams.set("searchString",str);
+    }else {
+        url.searchParams.delete("searchString");
+    }
+    const cats = document.getElementsByName("category");
+    for (const cat of cats){
+        if(cat.checked){
+            url.searchParams.set("category",cat.value);
+            break;
+        }
+    }
+    location.href = url.href;
+}
+
+const cats = JSON.parse(localStorage.getItem("cats"));
+if(cats){
+    const catFilterTemplate = document.getElementById("catFilterTemplate");
+    for (const cat of cats){
+        const inputcopy = catFilterTemplate.querySelector("input").cloneNode();
+        const spancopy = catFilterTemplate.querySelector("span").cloneNode();
+        inputcopy.setAttribute("value",cat);
+        inputcopy.checked = false;
+        spancopy.innerText = cat;
+        const br = document.createElement("br");
+        catFilterTemplate.appendChild(inputcopy);
+        catFilterTemplate.appendChild(spancopy);
+        catFilterTemplate.appendChild(br);
+    }
+}
+
 if(searchString){
-    doRequest("GET",`/products/search/${searchString}`, searchProcessor);
+    document.getElementById("searchBar").value = searchString;
+}
+if(category && category!=="all"){
+    const radios = document.getElementsByName("category");
+    for(const radio of radios){
+        if (radio.value===category){
+            radio.checked=true;
+            break;
+        }
+    }
+    applyFilter();
+}else{
+    doSearch();
 }
