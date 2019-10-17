@@ -72,7 +72,6 @@ public class UserManager {
         myUserRepo.save(tmp);
         MyUserCredentials myUserCredentials = new MyUserCredentials();
         myUserCredentials.setEmail(signUpDTO.getEmail());
-        //TODO make sure javascript encodes into base64 and password is never decoded from base64
         myUserCredentials.setPassword(passwordEncoder.encode(signUpDTO.getPassword()));
         myUserCredentials.setAuthorities("USER");
         myUserCredentials.setMyUser(tmp);
