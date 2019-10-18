@@ -39,7 +39,7 @@ public class PageProvider {
     }
 
     @GetMapping("/cart")
-    String getCartPage(){
+    String getCartPage() {
         return "cart.html";
     }
 }
