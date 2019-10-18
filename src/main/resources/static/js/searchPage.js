@@ -161,7 +161,7 @@ if (cats) {
 if (searchString) {
     document.getElementById("searchBar").value = searchString;
 }
-if (category && category !== "all") {
+if (category && category !== "All") {
     const radios = document.getElementsByName("category");
     for (const radio of radios) {
         if (radio.value === category) {
