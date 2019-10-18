@@ -93,17 +93,12 @@ public class CartManager {
         Cart cart = getUserCart(userId);
         for (CartItem cartItem : cart.getProducts()) {
             if (cartItem.getProduct().equals(product)) {
-                if (cartItem.getQuantity() == 1) {
-                    cartItemRepo.delete(cartItem);
-                    cart.getProducts().remove(cartItem);
-                    updateCart(cart);
-                    return product.getDTO();
-                } else if (cartItem.getQuantity() > 1) {
-                    cartItem.setQuantity(cartItem.getQuantity() - 1);
-                    cartItemRepo.save(cartItem);
-//                    updateCart(cart);
-                    return product.getDTO();
-                }
+
+                cartItemRepo.delete(cartItem);
+                cart.getProducts().remove(cartItem);
+                updateCart(cart);
+                return product.getDTO();
+
             }
         }
         return null;

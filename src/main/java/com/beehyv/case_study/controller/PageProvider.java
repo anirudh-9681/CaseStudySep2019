@@ -37,4 +37,9 @@ public class PageProvider {
     String getSearchPage() {
         return "searchPage.html";
     }
+
+    @GetMapping("/cart")
+    String getCartPage(){
+        return "cart.html";
+    }
 }
