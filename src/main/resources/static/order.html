@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/indexPage.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/order.css">
     <link rel="shortcut icon" href="images/logo-black.ico" type="image/x-icon">
     <title>Shop</title>
     <script src="js/site-utils.js"></script>
@@ -73,58 +73,13 @@
         </nav>
     </header>
     <section class="mt-5">
-        <div class="container">
-            <div class="row mx-3 mx-md-0">
-                <h3>Cart</h3>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="row">
-                <template id="cartItemTemplate">
-                    <div class="row flex-column flex-md-row product-card mt-2">
-                        <div class="col col-md-3">
-                            <img src="images/notfound.jpg" alt="Product Image">
-                        </div>
-                        <div class="col mt-3 mb-5 my-md-0 col-md-7">
-                            <h4>Product Name</h4>
-                            <p class="text-muted">Price</p>
-                            <span>Quantity: </span><input type="number" min="1" step="1" value="2" disabled>
-                            <button type="button" class="btn btn-secondary shadow-none ml-2 py-1">Edit</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-danger shadow-none">Remove</button>
-                        </div>
-                    </div>
-                </template>
-                <template id="emptyCart">
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col text-muted text-center">
-                            <h2>Cart is Empty!</h2>
-                        </div>
-                        <div class="col"></div>
-                    </div>
-                </template>
-                <div id="cartItemContainer" class="col">
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col">
-
-                </div>
-                <div class="col-6 col-md-2 text-center d-flex align-items-center">
-                    Cart Value: <span id="cartTotal">0</span>
-                </div>
-                <div class="col col-md-4 col-lg-3">
-                    <button class="btn btn-lg btn-success shadow-none" onclick="doCheckOut()">Check Out</button>
-                </div>
-            </div>
+        
     </section>
     <footer>
 
     </footer>
     <script src="js/header.js"></script>
-    <script src="js/cart.js"></script>
+    <script src="js/order.js"></script>
 </body>
 
 </html>

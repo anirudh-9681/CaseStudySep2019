@@ -7,6 +7,7 @@ function showEmptyCart() {
 }
 
 function fillCart(cartItems) {
+    let cartTotal = 0;
     for (const cartItem of cartItems) {
         const copy = cartItemTemplate.cloneNode(true).content;
         copy.children[0].children[1].children[0].innerText = cartItem.product.name;
@@ -17,7 +18,9 @@ function fillCart(cartItems) {
         copy.children[0].children[1].children[4].setAttribute("id", `buttonQty${cartItem.cartItemId}`);
         copy.children[0].children[2].children[0].setAttribute("onclick", `removeCartItem(${cartItem.product.productId})`);
         cartItemContainer.appendChild(copy);
+        cartTotal += cartItem.quantity * cartItem.product.price;
     }
+    document.getElementById("cartTotal").innerText = cartTotal;
 }
 
 const cartUpdateProcessor = function () {
@@ -26,7 +29,7 @@ const cartUpdateProcessor = function () {
     } else if (this.status === 401) {
         location.pathname = "/login";
     } else {
-        alert("Something went wrong, Please try later");
+        alert("Something went wrong. Please try later or contact support");
     }
 };
 
@@ -65,4 +68,25 @@ const cartProcessor = function () {
 if (localStorage.getItem("user")) {
     const user = JSON.parse(localStorage.getItem("user"));
     doRequest("GET", `/cart/${user.userId}/getCart`, cartProcessor);
+}
+
+const checkOrder = function(){
+    if(this.status === 200){
+        alert("Order has been placed");
+        location.reload();
+    }else if(this.status === 401){
+        alert("You cannot perform this action");
+    }else{
+        alert("Something went wrong. Please try later or contact support");
+    }
+};
+
+function doCheckOut(){
+    const user = JSON.parse(localStorage.getItem("user"));
+    if(user){
+        doRequest("GET",`/order/${user.userId}/createOrder`)
+    }else{
+        location.pathname = "/login";
+    }
+    
 }
