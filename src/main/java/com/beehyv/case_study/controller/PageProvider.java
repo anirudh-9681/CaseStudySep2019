@@ -42,4 +42,9 @@ public class PageProvider {
     String getCartPage() {
         return "cart.html";
     }
+
+    @GetMapping("/orders")
+    String getOrderPage() {
+        return "order.html";
+    }
 }

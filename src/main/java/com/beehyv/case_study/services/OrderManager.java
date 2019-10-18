@@ -39,6 +39,9 @@ public class OrderManager {
             return null;
         }
         MyUser myUser = userManager.getUserById(userId);
+        if (myUser.getCart().getProducts().size() == 0) {
+            return null;
+        }
         List<OrderItem> orderItems = myUser.getCart().getProducts()
                 .stream()
                 .map(cartItem -> {

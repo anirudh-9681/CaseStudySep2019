@@ -70,23 +70,23 @@ if (localStorage.getItem("user")) {
     doRequest("GET", `/cart/${user.userId}/getCart`, cartProcessor);
 }
 
-const checkOrder = function(){
-    if(this.status === 200){
+const checkOrder = function () {
+    if (this.status === 200) {
         alert("Order has been placed");
         location.reload();
-    }else if(this.status === 401){
-        alert("You cannot perform this action");
-    }else{
+    } else if (this.status === 401) {
+        location.pathname = "/login";
+    } else {
         alert("Something went wrong. Please try later or contact support");
     }
 };
 
-function doCheckOut(){
+function doCheckOut() {
     const user = JSON.parse(localStorage.getItem("user"));
-    if(user){
-        doRequest("GET",`/order/${user.userId}/createOrder`)
-    }else{
+    if (user) {
+        doRequest("GET", `/order/${user.userId}/createOrder`, checkOrder);
+    } else {
         location.pathname = "/login";
     }
-    
+
 }
