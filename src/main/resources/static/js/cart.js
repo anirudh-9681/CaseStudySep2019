@@ -39,9 +39,14 @@ function changeQty(cartItemId) {
         qtyInput.disabled = false;
         document.getElementById(`buttonQty${cartItemId}`).innerText = "Save";
     } else {
+
         qtyInput.disabled = true;
         let obj = {};
         obj.quantity = qtyInput.value;
+        if(Number(qtyInput)<=0){
+            alert("Quantity cannot be zero");
+            return;
+        }
         doRequest("POST", `/cart/changeQuantity/${cartItemId}`, cartUpdateProcessor, obj);
     }
 }
