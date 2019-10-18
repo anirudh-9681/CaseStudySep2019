@@ -51,7 +51,11 @@ function fillProducts(products_list) {
     while (productContainer.firstChild) {
         productContainer.removeChild(productContainer.firstChild);
     }
-
+    if(products_list.length === 0){
+        const noProductsFound = document.getElementById("noProductsFound").cloneNode(true).content;
+        productContainer.appendChild(noProductsFound);
+        return;
+    }
     for (const product of products_list) {
         const copy = productCard.cloneNode(true).content;
         copy.children[0].children[1].children[0].innerText = product["name"];
@@ -106,6 +110,12 @@ const searchProcessor = function () {
     if (this.status === 200) {
         products_list = JSON.parse(this.response);
         fillProducts(products_list);
+    }
+};
+
+const subcatProcessor = function () {
+    if (this.status === 200) {
+        products_list = JSON.parse(this.response);
         fillSubcategories(products_list);
     }
 };
@@ -162,6 +172,7 @@ if (searchString) {
     document.getElementById("searchBar").value = searchString;
 }
 if (category && category !== "All") {
+    doRequest("GET", `/products/${category}`, subcatProcessor);
     const radios = document.getElementsByName("category");
     for (const radio of radios) {
         if (radio.value === category) {
