@@ -103,14 +103,7 @@
                     <div class="row m-0 py-2">
                         <label class="w-25 my-auto">Subcategories</label>
                         <div class="col px-1" id="subCatContainerAdd">
-                            <input class="my-auto mx-3" type="hidden" name="subcategoryAdd" value="hero" id="subcategoryTemplate"> <label>Hero</label>
-                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
-                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
-                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
-                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
-                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
-                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
-                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                            <input class="my-auto mx-3" type="hidden" name="subcategoryAdd" value="hero" id="subcategoryTemplate">
                         </div>
                         <div class="col">
                             <input type="text" id="customSubcategoryAdd">
@@ -122,7 +115,39 @@
                     </div>
                 </form>
             </div>
-            <div class="tab-pane fade" id="modifyProduct">Modifying</div>
+            <div class="tab-pane fade" id="modifyProduct">
+                <form>
+                    <div class="row m-0 py-2">
+                        <label class="w-25" for="productNameModify">Product Name</label> <input type="text" name="productName" id="productNameModify">
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label class="w-25" for="productPriceModify">Product price</label> <input type="number" name="productPrice" id="productPriceModify">
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label class="w-25" for="productDetailsModify">Product details</label> <textarea cols="40" id="productDetailsModify"></textarea>
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label for="categorySelectModify" class="w-25">Category</label>
+                        <select class="col" id="categorySelectModify">
+                            <option value="Custom"> Custom </option>
+                        </select>
+                        <input class="col-3 mx-3" type="text" name="Category" id="customCategoryModify">
+                        <input class="ml-auto" type="button" id="customCatBtnModify" value="Modify Category" onclick="addCustomCatModify()">
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label class="w-25 my-auto">Subcategories</label>
+                        <div class="col px-1" id="subCatContainerModify">
+                        </div>
+                        <div class="col">
+                            <input type="text" id="customSubcategoryModify">
+                            <input class="ml-3" type="button" id="customSubBtnModify" value="Add Subcategory" onclick="addCustomSubcatModify()">
+                        </div>
+                    </div>
+                    <div class="row m-0 py-2">
+                        <button class="ml-auto mr-5 my-5 btn btn-primary" type="button" onclick="modifyProduct()" >Modify Product</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>
