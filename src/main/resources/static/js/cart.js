@@ -39,7 +39,6 @@ function changeQty(cartItemId) {
         qtyInput.disabled = false;
         document.getElementById(`buttonQty${cartItemId}`).innerText = "Save";
     } else {
-
         qtyInput.disabled = true;
         let obj = {};
         obj.quantity = qtyInput.value;
@@ -82,7 +81,7 @@ const checkOrder = function () {
     } else if (this.status === 401) {
         location.pathname = "/login";
     } else {
-        alert("Something went wrong. Please try later or contact support");
+        alert("Cart cannot be empty");
     }
 };
 
