@@ -70,4 +70,8 @@ public class ProductDTO {
     public int hashCode() {
         return Objects.hash(productId);
     }
+
+    public boolean isValid(){
+        return price>0 && Objects.nonNull(name) && Objects.nonNull(details) && Objects.nonNull(category) && Objects.nonNull(subcategory);
+    }
 }

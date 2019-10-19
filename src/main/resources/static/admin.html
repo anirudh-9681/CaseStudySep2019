@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/indexPage.css">
+    <link rel="shortcut icon" href="images/logo-black.ico" type="image/x-icon">
+    <title>Shop</title>
+    <script src="js/site-utils.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand font-weight-bold" id="siteName" href="/">
+            <img class="rounded mx-3" src="images/logo.ico" alt="A logo" width="50">
+            SHOP
+        </a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container-fluid d-flex flex-column flex-md-row">
+            <form class="form-inline col col-md-8 col-lg-6 ml-md-auto mr-md-1">
+                <div id="searchContainer" class="md-form mx-1 my-2 px-0 my-md-0 col">
+                    <input id="searchBar" class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    <button id="searchButton" class="btn btn-secondary" onclick="search(event)">
+                        <i class="material-icons">
+                            search
+                        </i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark py-0 py-md-1">
+        <div class="collapse navbar-collapse mr-0 mb-3 mb-md-0" id="navbarSupportedContent">
+            <template id="categoryTemplate">
+                <li class="nav-item col mx-1 text-center"><a href="#" class="nav-link text-light">Category</a>
+                </li>
+            </template>
+            <template id="welcomeTemplate">
+                <div class="dropdown">
+                    <button type="button" class="btn mx-md-auto btn-dark dropdown-toggle" data-toggle="dropdown">
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/getProfile">Account Settings</a>
+                        <a class="dropdown-item" href="/cart">Cart</a>
+                        <a class="dropdown-item" href="/orders">Orders</a>
+                        <a class="dropdown-item" href="#" onclick="doLogout(event);return false;">Log Out</a>
+                    </div>
+                </div>
+            </template>
+            <ul class="navbar-nav w-100" id="categoryContainer">
+                <li class="nav-item mx-3 text-center">
+                    <a class="nav-link text-light" href="/login">Login</a>
+                </li>
+                <li class="nav-item mx-3 text-center">
+                    <a class="nav-link rounded text-light badge-info px-2" href="/signUp">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<section>
+    <div class="container">
+        <ul class="nav nav-tabs m-4" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="add-tab" data-toggle="tab" href="#addProduct">Add Product</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="modify-tab" data-toggle="tab" href="#modifyProduct">Modify Product</a>
+            </li>
+        </ul>
+        <div class="tab-content m-4" id="myTabContent">
+            <div class="tab-pane fade show active" id="addProduct">
+                <form>
+                    <div class="row m-0 py-2">
+                        <label class="w-25" for="productNameAdd">Product Name</label> <input type="text" name="productName" id="productNameAdd">
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label class="w-25" for="productPriceAdd">Product price</label> <input type="number" name="productPrice" id="productPriceAdd">
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label class="w-25" for="productDetailsAdd">Product details</label> <textarea cols="40" id="productDetailsAdd"></textarea>
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label for="categorySelectAdd" class="w-25">Category</label>
+                        <select class="col" id="categorySelectAdd">
+                            <option value="Custom"> Custom </option>
+                        </select>
+                        <input class="col-3 mx-3" type="text" name="Category" id="customCategoryAdd">
+                        <input class="ml-auto" type="button" id="customCatBtnAdd" value="Add Category" onclick="addCustomCatAdd()">
+                    </div>
+                    <div class="row m-0 py-2">
+                        <label class="w-25 my-auto">Subcategories</label>
+                        <div class="col px-1" id="subCatContainerAdd">
+                            <input class="my-auto mx-3" type="hidden" name="subcategoryAdd" value="hero" id="subcategoryTemplate"> <label>Hero</label>
+                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                            <input class="my-auto mx-3" type="checkbox" name="subcategoryAdd" value="hero"> hero
+                        </div>
+                        <div class="col">
+                            <input type="text" id="customSubcategoryAdd">
+                            <input class="ml-3" type="button" id="customSubBtnAdd" value="Add Subcategory" onclick="addCustomSubcatAdd()">
+                        </div>
+                    </div>
+                    <div class="row m-0 py-2">
+                        <button class="ml-auto mr-5 my-5 btn btn-primary" type="button" onclick="addProduct()" >Add Product</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="modifyProduct">Modifying</div>
+        </div>
+    </div>
+</section>
+
+<script src="js/header.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>
