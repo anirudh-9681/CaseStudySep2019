@@ -103,7 +103,12 @@ const checkAddToCart = function () {
 
 function addToCart(id) {
     const user = JSON.parse(localStorage.getItem("user"));
-    doRequest("GET", `/cart/${user["userId"]}/add/${id}`, checkAddToCart);
+    if(user){
+        doRequest("GET", `/cart/${user["userId"]}/add/${id}`, checkAddToCart);
+    }else{
+        location.pathname = "/login";
+    }
+
 }
 
 const searchProcessor = function () {
