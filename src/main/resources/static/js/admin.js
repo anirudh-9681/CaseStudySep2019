@@ -128,6 +128,7 @@ function addCustomSubcatAdd(s) {
         const newSubCat = document.getElementById("subcategoryTemplate").cloneNode();
         newSubCat.setAttribute("type", "checkbox");
         newSubCat.setAttribute("value", str);
+        newSubCat.setAttribute("name","subcategoryAdd");
         subcatContainerAdd.appendChild(newSubCat);
         const label = document.createElement("label");
         label.innerText = str;
