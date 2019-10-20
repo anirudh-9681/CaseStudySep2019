@@ -90,14 +90,14 @@
                         <label class="w-25" for="productPriceAdd">Product price</label> <input type="number" name="productPrice" id="productPriceAdd">
                     </div>
                     <div class="row m-0 py-2">
-                        <label class="w-25" for="productDetailsAdd">Product details</label> <textarea cols="40" id="productDetailsAdd"></textarea>
+                        <label class="w-25" for="productDetailsAdd">Product details</label> <textarea name="productDetails" cols="40" id="productDetailsAdd"></textarea>
                     </div>
                     <div class="row m-0 py-2">
                         <label for="categorySelectAdd" class="w-25">Category</label>
-                        <select class="col" id="categorySelectAdd">
+                        <select name="category" class="col" id="categorySelectAdd">
                             <option value="Custom"> Custom </option>
                         </select>
-                        <input class="col-3 mx-3" type="text" name="Category" id="customCategoryAdd">
+                        <input class="col-3 mx-3" type="text" id="customCategoryAdd">
                         <input class="ml-auto" type="button" id="customCatBtnAdd" value="Add Category" onclick="addCustomCatAdd()">
                     </div>
                     <div class="row m-0 py-2">
