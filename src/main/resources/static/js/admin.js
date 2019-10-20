@@ -1,12 +1,13 @@
 const cstmCatSelect = document.getElementById("categorySelectAdd");
 const subcatContainer = document.getElementById("subCatContainerAdd");
 const checkAddProduct = function () {
-    if(this.status === 200){
+    if (this.status === 200) {
         alert("product has been successfully added");
-    }else{
+    } else {
         alert("Something went wrong, contact maintenance");
     }
 };
+
 function addProduct() {
     let obj = {};
     // REQUEST : {
@@ -34,36 +35,38 @@ function addProduct() {
     if (obj.subcategory) {
         obj.subcategory += "]";
     }
-    doRequest("POST","/products/addProduct",checkAddProduct,obj);
+    doRequest("POST", "/products/addProduct", checkAddProduct, obj);
 }
+
 function addCustomCatAdd(s) {
     let str;
-    if (s){
+    if (s) {
         str = s;
-    }else{
+    } else {
         str = document.getElementById("customCategoryAdd").value.trim();
     }
-    if(str){
+    if (str) {
         const opt = document.createElement("option");
         opt.value = str;
         opt.innerText = str;
-        cstmCatSelect.options.add(opt,0);
+        cstmCatSelect.options.add(opt, 0);
         cstmCatSelect.selectedIndex = 0;
-    }else{
+    } else {
         alert("New Category cannot be empty");
     }
 }
+
 function addCustomSubcatAdd(s) {
     let str;
-    if (s){
+    if (s) {
         str = s;
-    }else{
+    } else {
         str = document.getElementById("customSubcategoryAdd").value.trim();
     }
-    if(str){
+    if (str) {
         const newSubCat = document.getElementById("subcategoryTemplate").cloneNode();
-        newSubCat.setAttribute("type","checkbox");
-        newSubCat.setAttribute("value",str);
+        newSubCat.setAttribute("type", "checkbox");
+        newSubCat.setAttribute("value", str);
         subcatContainer.appendChild(newSubCat);
         const label = document.createElement("label");
         label.innerText = str;
@@ -96,6 +99,6 @@ const subcatProcessor = function () {
 
 doRequest("GET", `/products`, subcatProcessor);
 const cats = JSON.parse(localStorage.getItem("cats"));
-for(const cat of cats){
+for (const cat of cats) {
     addCustomCatAdd(cat);
 }

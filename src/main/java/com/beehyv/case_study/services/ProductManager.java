@@ -20,7 +20,7 @@ public class ProductManager {
         if (productRepo.existsByProductId(productDTO.getProductId())) {
             return null;
         }
-        if(!productDTO.isValid()){
+        if (!productDTO.isValid()) {
             return null;
         }
         Product product = new Product();
@@ -34,7 +34,7 @@ public class ProductManager {
 
     public ProductDTO updateProduct(ProductDTO productDTO) {
         if (productRepo.existsByProductId(productDTO.getProductId())) {
-            if (!productDTO.isValid()){
+            if (!productDTO.isValid()) {
                 return null;
             }
             Product product = productRepo.findByProductId(productDTO.getProductId());

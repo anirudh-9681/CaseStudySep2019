@@ -51,7 +51,7 @@ function fillProducts(products_list) {
     while (productContainer.firstChild) {
         productContainer.removeChild(productContainer.firstChild);
     }
-    if(products_list.length === 0){
+    if (products_list.length === 0) {
         const noProductsFound = document.getElementById("noProductsFound").cloneNode(true).content;
         productContainer.appendChild(noProductsFound);
         return;

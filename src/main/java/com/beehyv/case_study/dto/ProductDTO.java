@@ -71,7 +71,7 @@ public class ProductDTO {
         return Objects.hash(productId);
     }
 
-    public boolean isValid(){
-        return price>0 && Objects.nonNull(name) && Objects.nonNull(details) && Objects.nonNull(category) && Objects.nonNull(subcategory);
+    public boolean isValid() {
+        return price > 0 && Objects.nonNull(name) && Objects.nonNull(details) && Objects.nonNull(category) && Objects.nonNull(subcategory);
     }
 }

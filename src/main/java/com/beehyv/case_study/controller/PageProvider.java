@@ -43,8 +43,13 @@ public class PageProvider {
         return "cart.html";
     }
 
-    @GetMapping("/orders")
+    @GetMapping("/order")
     String getOrderPage() {
         return "order.html";
+    }
+
+    @GetMapping("/admin")
+    String getAdminPage() {
+        return "admin.html";
     }
 }

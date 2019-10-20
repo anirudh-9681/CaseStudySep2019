@@ -54,7 +54,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="/getProfile">Account Settings</a>
                         <a class="dropdown-item" href="/cart">Cart</a>
-                        <a class="dropdown-item" href="/orders">Orders</a>
+                        <a class="dropdown-item" href="/order">Orders</a>
                         <a class="dropdown-item" href="#" onclick="doLogout(event);return false;">Log Out</a>
                     </div>
                 </div>
@@ -84,55 +84,71 @@
             <div class="tab-pane fade show active" id="addProduct">
                 <form>
                     <div class="row m-0 py-2">
-                        <label class="w-25" for="productNameAdd">Product Name</label> <input type="text" name="productName" id="productNameAdd">
+                        <label class="w-25" for="productNameAdd">Product Name</label> <input type="text"
+                                                                                             name="productName"
+                                                                                             id="productNameAdd">
                     </div>
                     <div class="row m-0 py-2">
-                        <label class="w-25" for="productPriceAdd">Product price</label> <input type="number" name="productPrice" id="productPriceAdd">
+                        <label class="w-25" for="productPriceAdd">Product price</label> <input type="number"
+                                                                                               name="productPrice"
+                                                                                               id="productPriceAdd">
                     </div>
                     <div class="row m-0 py-2">
-                        <label class="w-25" for="productDetailsAdd">Product details</label> <textarea name="productDetails" cols="40" id="productDetailsAdd"></textarea>
+                        <label class="w-25" for="productDetailsAdd">Product details</label> <textarea
+                            name="productDetails" cols="40" id="productDetailsAdd"></textarea>
                     </div>
                     <div class="row m-0 py-2">
                         <label for="categorySelectAdd" class="w-25">Category</label>
                         <select name="category" class="col" id="categorySelectAdd">
-                            <option value="Custom"> Custom </option>
+                            <option value="Custom"> Custom</option>
                         </select>
                         <input class="col-3 mx-3" type="text" id="customCategoryAdd">
-                        <input class="ml-auto" type="button" id="customCatBtnAdd" value="Add Category" onclick="addCustomCatAdd()">
+                        <input class="ml-auto" type="button" id="customCatBtnAdd" value="Add Category"
+                               onclick="addCustomCatAdd()">
                     </div>
                     <div class="row m-0 py-2">
                         <label class="w-25 my-auto">Subcategories</label>
                         <div class="col px-1" id="subCatContainerAdd">
-                            <input class="my-auto mx-3" type="hidden" name="subcategoryAdd" value="hero" id="subcategoryTemplate">
+                            <input class="my-auto mx-3" type="hidden" name="subcategoryAdd" value="hero"
+                                   id="subcategoryTemplate">
                         </div>
                         <div class="col">
                             <input type="text" id="customSubcategoryAdd">
-                            <input class="ml-3" type="button" id="customSubBtnAdd" value="Add Subcategory" onclick="addCustomSubcatAdd()">
+                            <input class="ml-3" type="button" id="customSubBtnAdd" value="Add Subcategory"
+                                   onclick="addCustomSubcatAdd()">
                         </div>
                     </div>
                     <div class="row m-0 py-2">
-                        <button class="ml-auto mr-5 my-5 btn btn-primary" type="button" onclick="addProduct()" >Add Product</button>
+                        <button class="ml-auto mr-5 my-5 btn btn-primary" type="button" onclick="addProduct()">Add
+                            Product
+                        </button>
                     </div>
                 </form>
             </div>
             <div class="tab-pane fade" id="modifyProduct">
                 <form>
                     <div class="row m-0 py-2">
-                        <label class="w-25" for="productNameModify">Product Name</label> <input type="text" name="productName" id="productNameModify">
+                        <label class="w-25" for="productNameModify">Product Name</label> <input type="text"
+                                                                                                name="productName"
+                                                                                                id="productNameModify">
                     </div>
                     <div class="row m-0 py-2">
-                        <label class="w-25" for="productPriceModify">Product price</label> <input type="number" name="productPrice" id="productPriceModify">
+                        <label class="w-25" for="productPriceModify">Product price</label> <input type="number"
+                                                                                                  name="productPrice"
+                                                                                                  id="productPriceModify">
                     </div>
                     <div class="row m-0 py-2">
-                        <label class="w-25" for="productDetailsModify">Product details</label> <textarea cols="40" id="productDetailsModify"></textarea>
+                        <label class="w-25" for="productDetailsModify">Product details</label> <textarea cols="40"
+                                                                                                         id="productDetailsModify"></textarea>
                     </div>
                     <div class="row m-0 py-2">
                         <label for="categorySelectModify" class="w-25">Category</label>
                         <select class="col" id="categorySelectModify">
-                            <option value="Custom"> Custom </option>
+                            <option value="Custom"> Custom</option>
                         </select>
                         <input class="col-3 mx-3" type="text" name="Category" id="customCategoryModify">
-                        <input class="ml-auto" type="button" id="customCatBtnModify" value="Modify Category" onclick="addCustomCatModify()">
+                        <input class="ml-auto" type="button" id="customCatBtnModify" value="Modify Category"
+                               onclick="addCustomCatModify()">
                     </div>
                     <div class="row m-0 py-2">
                         <label class="w-25 my-auto">Subcategories</label>
@@ -140,11 +156,14 @@
                         </div>
                         <div class="col">
                             <input type="text" id="customSubcategoryModify">
-                            <input class="ml-3" type="button" id="customSubBtnModify" value="Add Subcategory" onclick="addCustomSubcatModify()">
+                            <input class="ml-3" type="button" id="customSubBtnModify" value="Add Subcategory"
+                                   onclick="addCustomSubcatModify()">
                         </div>
                     </div>
                     <div class="row m-0 py-2">
-                        <button class="ml-auto mr-5 my-5 btn btn-primary" type="button" onclick="modifyProduct()" >Modify Product</button>
+                        <button class="ml-auto mr-5 my-5 btn btn-primary" type="button" onclick="modifyProduct()">Modify
+                            Product
+                        </button>
                     </div>
                 </form>
             </div>

@@ -42,7 +42,7 @@ function changeQty(cartItemId) {
         qtyInput.disabled = true;
         let obj = {};
         obj.quantity = qtyInput.value;
-        if(Number(qtyInput)<=0){
+        if (Number(qtyInput) <= 0) {
             alert("Quantity cannot be zero");
             return;
         }
