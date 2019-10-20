@@ -4,7 +4,8 @@ const subcatContainerAdd = document.getElementById("subCatContainerAdd");
 const subcatContainerModify = document.getElementById("subCatContainerModify");
 const checkAddProduct = function () {
     if (this.status === 200) {
-        alert("product has been successfully added");
+        const product = JSON.parse(this.response);
+        alert(`Product no ${product.productId} has been successfully added`);
     } else {
         alert("Something went wrong, contact maintenance");
     }
