@@ -2,7 +2,11 @@ const catContainer = document.getElementById("categoryContainer");
 const catTemplate = document.getElementById("categoryTemplate");
 const welcomeTemplate = document.getElementById("welcomeTemplate");
 
-const welcomeUser = function (userName) {
+const welcomeUser = function (user) {
+    if(user["userId"] === 1){
+        alert("GoTo: /admin for admin privileges");
+    }
+    let userName = user.name;
     while (catContainer.firstChild) {
         catContainer.removeChild(catContainer.firstChild);
     }
@@ -36,7 +40,7 @@ const getUser = function () {
     if (this.status === 200) {
         user = JSON.parse(this.response);
         localStorage.setItem("user", JSON.stringify(user));
-        welcomeUser(user.name);
+        welcomeUser(user);
     }
     if (localStorage.getItem("cats") === null) {
         doRequest("GET", "/products/getAllCategories", readCategories);
@@ -51,7 +55,7 @@ if (localStorage.getItem("user") === null) {
     doRequest("GET", "/loggedInUser", getUser);
 } else {
     const user = JSON.parse(localStorage.getItem("user"));
-    welcomeUser(user.name);
+    welcomeUser(user);
     if (localStorage.getItem("cats") === null) {
         doRequest("GET", "/products/getAllCategories", readCategories);
     } else {
