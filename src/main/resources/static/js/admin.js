@@ -75,7 +75,7 @@ function modifyProduct() {
         }
     }
     if (obj.subcategory) {
-        obj.subcategory = obj.subcategory.slice(0,obj.subcategory.length-1);
+        obj.subcategory = obj.subcategory.slice(0, obj.subcategory.length - 1);
         obj.subcategory += "]";
     }
     doRequest("POST", "/products/update", checkModifyProduct, obj);
@@ -129,7 +129,7 @@ function addCustomSubcatAdd(s) {
         const newSubCat = document.getElementById("subcategoryTemplate").cloneNode();
         newSubCat.setAttribute("type", "checkbox");
         newSubCat.setAttribute("value", str);
-        newSubCat.setAttribute("name","subcategoryAdd");
+        newSubCat.setAttribute("name", "subcategoryAdd");
         subcatContainerAdd.appendChild(newSubCat);
         const label = document.createElement("label");
         label.innerText = str;
@@ -148,7 +148,7 @@ function addCustomSubcatModify(s) {
         const newSubCat = document.getElementById("subcategoryTemplate").cloneNode();
         newSubCat.setAttribute("type", "checkbox");
         newSubCat.setAttribute("value", str);
-        newSubCat.setAttribute("name","subcategoryModify");
+        newSubCat.setAttribute("name", "subcategoryModify");
         subcatContainerModify.appendChild(newSubCat);
         const label = document.createElement("label");
         label.innerText = str;
@@ -180,36 +180,35 @@ const subcatProcessor = function () {
     }
 };
 
-function loadProduct(){
+function loadProduct() {
     const productId = document.getElementById("productIdModify").value;
-    doRequest("GET",`/products/getById/${productId}`,showProduct);
+    doRequest("GET", `/products/getById/${productId}`, showProduct);
 }
 
-const showProduct = function(){
-    if (this.status === 200){
+const showProduct = function () {
+    if (this.status === 200) {
         const product = JSON.parse(this.response);
         document.getElementById("productNameModify").value = product.name;
         document.getElementById("productPriceModify").value = product.price;
         document.getElementById("productDetailsModify").value = product.details;
         document.getElementById("categorySelectModify").value = product.category;
-        const productSubs = product.subcategory.slice(1,product.subcategory.length-1).split(",");
+        const productSubs = product.subcategory.slice(1, product.subcategory.length - 1).split(",");
         let productSubsArray = [];
-        for(const pr of productSubs){
+        for (const pr of productSubs) {
             productSubsArray.push(pr.trim());
         }
         const subs = document.getElementsByName("subcategoryModify");
-        for(const sub of subs){
-            if(productSubsArray.includes(sub.value)){
+        for (const sub of subs) {
+            if (productSubsArray.includes(sub.value)) {
                 sub.checked = true;
-            }else{
+            } else {
                 sub.checked = false;
             }
         }
-    }else{
+    } else {
         console.log(this);
     }
 };
-
 
 
 doRequest("GET", `/products`, subcatProcessor);

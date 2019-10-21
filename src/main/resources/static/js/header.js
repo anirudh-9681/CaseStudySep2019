@@ -11,17 +11,15 @@ const welcomeUser = function (user) {
     const copy = welcomeTemplate.cloneNode(true).content;
     copy.children[0].children[0].innerText = `Welcome, ${userName}`;
     catContainer.insertChildAtIndex(copy, catContainer.length);
-    if(user["userId"] === 1){
-        if(location.pathname === "/"){
-            alert("Go To /admin for admin pages");
-        }
-        // window.onload = (event) => {
-        //     const userLinks = document.getElementById("userLinks");
-        //     const a = userLinks.children[0].cloneNode(true);
-        //     a.setAttribute("href", "/admin");
-        //     a.innerText = "Admin Utils";
-        //     userLinks.insertChildAtIndex(a, 0);
-        // };
+    if (user["userId"] === 1) {
+        const allowAdmin = function () {
+            const userLinks = document.getElementById("userLinks");
+            const a = userLinks.children[0].cloneNode(true);
+            a.setAttribute("href", "/admin");
+            a.innerText = "Admin Utils";
+            userLinks.insertChildAtIndex(a, 0);
+        };
+        setTimeout(allowAdmin, 0);
     }
 };
 
