@@ -3,9 +3,7 @@ const catTemplate = document.getElementById("categoryTemplate");
 const welcomeTemplate = document.getElementById("welcomeTemplate");
 
 const welcomeUser = function (user) {
-    if(user["userId"] === 1){
-        alert("GoTo: /admin for admin privileges");
-    }
+
     let userName = user.name;
     while (catContainer.firstChild) {
         catContainer.removeChild(catContainer.firstChild);
@@ -13,6 +11,18 @@ const welcomeUser = function (user) {
     const copy = welcomeTemplate.cloneNode(true).content;
     copy.children[0].children[0].innerText = `Welcome, ${userName}`;
     catContainer.insertChildAtIndex(copy, catContainer.length);
+    if(user["userId"] === 1){
+        if(location.pathname === "/"){
+            alert("Go To /admin for admin pages");
+        }
+        // window.onload = (event) => {
+        //     const userLinks = document.getElementById("userLinks");
+        //     const a = userLinks.children[0].cloneNode(true);
+        //     a.setAttribute("href", "/admin");
+        //     a.innerText = "Admin Utils";
+        //     userLinks.insertChildAtIndex(a, 0);
+        // };
+    }
 };
 
 const readCategories = function () {
